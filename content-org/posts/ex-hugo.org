@@ -1,0 +1,23 @@
+#+TITLE: ox-hugo
+#+AUTHOR: John Thingstad
+#+DATE: <2023-07-11 ti.>
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Write entries in org mode with ox-hugo
+
+I updated my Emacs config to accept ox-hugo. This is a Org sub-mode that allows org
+documents to be exported as markup for hugo.  A new sub-directory contents-org was also
+added to hold the org versions of the files. It is set up so that the files are
+automatically converted to markup when saved.
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  config hugo

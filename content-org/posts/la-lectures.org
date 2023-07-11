@@ -1,0 +1,23 @@
+#+TITLE: Linear Algebra Lectures
+#+AUTHOR: John Thingstad
+#+DATE: <2023-07-11 ti.>
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Gilbert Strang lectures on Linear Algebra at MIT
+
+These video lectures of Professor Gilbert Strang teaching 18.06 were recorded live in the
+Fall of 1999. Support for the video production was provided by the Lord Foundation of
+Massachusetts under a grant to the MIT Center for Advanced Educational Services.
+
+[lectures](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/video_galleries/video-lectures/)
+
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
