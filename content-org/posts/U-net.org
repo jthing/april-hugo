@@ -1,0 +1,19 @@
+#+TITLE: U-net CNN in APL
+#+AUTHOR: John Thingstad
+#+DATE: <2023-07-11 ti.>
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Exploring zero-framework, zero-library machine learning
+
+Research paper from Dyalog on machine learning in APL.
+[paper](https://www.dyalog.com/uploads/conference/dyalog22/presentations/D08_ICFP_Submission.pdf)
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
