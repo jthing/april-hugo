@@ -1,0 +1,26 @@
+#+TITLE: APL and SPIR
+#+AUTHOR: John Thingstad
+#+DATE: <2023-07-11 ti.>
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Leveraging APL and SPIR-V languages to write network functions to be deployed on Vulkan compatible GPUs
+
+Research paper.
+
+Juuso Haavisto. Leveraging APL and SPIR-V languages to write network functions to be deployed
+on Vulkan compatible GPUs. Networking and Internet Architecture
+[cs.NI]. 2020. ffhal-03155647f
+
+[paper](https://inria.hal.science/hal-03155647/document)
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso
