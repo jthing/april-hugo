@@ -1,7 +1,7 @@
 ---
 title: "April - APL as a sublanguage of Common LIsp"
 date: 2023-07-09T11:43:38+02:00
-draft: true
+draft: false
 ---
 
 <!-- TITLE/ -->

@@ -1,7 +1,7 @@
 ---
 title: "April GPU"
 date: 2023-07-09T13:09:24+02:00
-draft: true
+draft: false
 ---
 
 ## Getting April to use a GPU
