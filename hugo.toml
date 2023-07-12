@@ -1,4 +1,5 @@
-baseURL = 'https://jpthing.github.io/'
+baseURL = '//jpthing.github.io/april-hugo/'
+relativeURLs = true
 languageCode = 'en-us'
 title = 'April - APL embedded in Common Lisp'
 theme = 'holy'

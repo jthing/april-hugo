@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on April - APL embedded in Common Lisp</title>
-    <link>http://localhost/posts/</link>
+    <link>//jpthing.github.io/april-hugo/posts/</link>
     <description>Recent content in Posts on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 11 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="http://localhost/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>APL and SPIR</title>
-      <link>http://localhost/posts/hal/</link>
+      <link>//jpthing.github.io/april-hugo/posts/hal/</link>
       <pubDate>Tue, 11 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>http://localhost/posts/hal/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/hal/</guid>
       <description>Leveraging APL and SPIR-V languages to write network functions to be deployed on Vulkan compatible GPUs Research paper.
 Juuso Haavisto. Leveraging APL and SPIR-V languages to write network functions to be deployed on Vulkan compatible GPUs. Networking and Internet Architecture [cs.NI]. 2020. ffhal-03155647f
 paper</description>
@@ -20,48 +20,48 @@ paper</description>
     
     <item>
       <title>Linear Algebra Lectures</title>
-      <link>http://localhost/posts/la-lectures/</link>
+      <link>//jpthing.github.io/april-hugo/posts/la-lectures/</link>
       <pubDate>Tue, 11 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>http://localhost/posts/la-lectures/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/la-lectures/</guid>
       <description>Gilbert Strang lectures on Linear Algebra at MIT These video lectures of Professor Gilbert Strang teaching 18.06 were recorded live in the Fall of 1999. Support for the video production was provided by the Lord Foundation of Massachusetts under a grant to the MIT Center for Advanced Educational Services.
 lectures</description>
     </item>
     
     <item>
       <title>ox-hugo</title>
-      <link>http://localhost/posts/ex-hugo/</link>
+      <link>//jpthing.github.io/april-hugo/posts/ex-hugo/</link>
       <pubDate>Tue, 11 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>http://localhost/posts/ex-hugo/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/ex-hugo/</guid>
       <description>Write entries in org mode with ox-hugo I updated my Emacs config to accept ox-hugo. This is a Org sub-mode that allows org documents to be exported as markup for hugo. A new sub-directory contents-org was also added to hold the org versions of the files. It is set up so that the files are automatically converted to markup when saved.</description>
     </item>
     
     <item>
       <title>U-net CNN in APL</title>
-      <link>http://localhost/posts/u-net/</link>
+      <link>//jpthing.github.io/april-hugo/posts/u-net/</link>
       <pubDate>Tue, 11 Jul 2023 00:00:00 +0200</pubDate>
       
-      <guid>http://localhost/posts/u-net/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/u-net/</guid>
       <description>Exploring zero-framework, zero-library machine learning Research paper from Dyalog on machine learning in APL. paper</description>
     </item>
     
     <item>
       <title>April GPU</title>
-      <link>http://localhost/posts/april-gpu/</link>
+      <link>//jpthing.github.io/april-hugo/posts/april-gpu/</link>
       <pubDate>Sun, 09 Jul 2023 13:09:24 +0200</pubDate>
       
-      <guid>http://localhost/posts/april-gpu/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/april-gpu/</guid>
       <description>Getting April to use a GPU Current state of affairs We live in days where there are constant wonders/horrors in the area of Machine Learning. For a long time this been the domain of a handful of tools.
 python numpy scipy jupyter ipython tensorflow torch pandas matplotlib rapids All of the above, but only for CUDA GPU&amp;rsquo;s and optimized to keep the computations in GPU RAM. Where April fits in April is just a APL compiler.</description>
     </item>
     
     <item>
       <title>April - APL as a sublanguage of Common LIsp</title>
-      <link>http://localhost/posts/april/</link>
+      <link>//jpthing.github.io/april-hugo/posts/april/</link>
       <pubDate>Sun, 09 Jul 2023 11:43:38 +0200</pubDate>
       
-      <guid>http://localhost/posts/april/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/april/</guid>
       <description>April Array Programming Re-Imagined in Lisp Ken Iverson&amp;rsquo;s masterpiece reflected in the medium of Lisp.
 April compiles a subset of the APL programming language into Common Lisp. Leveraging Lisp&amp;rsquo;s powerful macros and numeric processing faculties, it brings APL&amp;rsquo;s expressive potential to bear for Lisp developers. Replace hundreds of lines of number-crunching code with a single line of APL.
 Why April? APL veritably hums with algorithmic power. As a handful of characters run past the lexer, vast fields of data grow, morph and distil to reveal their secrets.</description>
@@ -69,10 +69,10 @@ Why April? APL veritably hums with algorithmic power. As a handful of characters
     
     <item>
       <title>Journal</title>
-      <link>http://localhost/posts/journal/</link>
+      <link>//jpthing.github.io/april-hugo/posts/journal/</link>
       <pubDate>Thu, 23 Feb 2023 00:00:00 +0100</pubDate>
       
-      <guid>http://localhost/posts/journal/</guid>
+      <guid>//jpthing.github.io/april-hugo/posts/journal/</guid>
       <description>2023 2023-02 februar 2023-02-23 torsdag 11:17 - april GPU journal
 Research ways of letting APL run on a GPU. In paricular a april extension. (April is a APL library for Common Lisp wich extestions for Dylog APL but relies on CL for IO.)
 APL to GPU slides for discussion on dylogs attempts. Rapids is a library for doing all calculation on the GPU. It contains cudf a library which is a drop in replacement for pandas but which performs the operation on the GPU.</description>

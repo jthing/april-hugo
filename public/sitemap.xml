@@ -2,35 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost/posts/hal/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/hal/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/</loc>
+    <loc>//jpthing.github.io/april-hugo/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/la-lectures/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/la-lectures/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/ex-hugo/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/ex-hugo/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/u-net/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/u-net/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/april-gpu/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/april-gpu/</loc>
     <lastmod>2023-07-09T13:09:24+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/april/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/april/</loc>
     <lastmod>2023-07-09T11:43:38+02:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/journal/</loc>
+    <loc>//jpthing.github.io/april-hugo/posts/journal/</loc>
     <lastmod>2023-02-23T00:00:00+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/categories/</loc>
+    <loc>//jpthing.github.io/april-hugo/categories/</loc>
   </url><url>
-    <loc>http://localhost/tags/</loc>
+    <loc>//jpthing.github.io/april-hugo/tags/</loc>
   </url>
 </urlset>
