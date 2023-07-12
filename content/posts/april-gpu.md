@@ -46,7 +46,7 @@ CUDA threads. Also it is possible to set up a compute pipeline in Vulcan without
 output. In fact displaying graphics is a extension in Vulcan and not part of the Vulcan
 core. 
 
-![targets](https://github.com/jthing/april-hugo/blob/main/static/images/spir.jpg)
+[SPIR](https://github.com/jthing/april-hugo/blob/main/static/images/spir.jpg)
 
 Vulcan accesses shaders in a binary cross platform format called SPIR-V.
 SPIRV-V is compiled to native code on the platform. It can be computed on AMD, NVIDIA and
@@ -62,7 +62,7 @@ idea of how the structure is going to be.
 
 Here is a sketch of the design.
 
-![targets](https://github.com/jthing/april-hugo/blob/main/static/images/april-gpu.svg)
+[GPU compile](https://github.com/jthing/april-hugo/blob/main/static/images/april-gpu.svg)
 
 
 ### GPU pipeline
@@ -71,4 +71,4 @@ This follows rather rigid design dictated by Vulkan.
 
 Here is a sketch of the design.
 
-![targets](https://github.com/jthing/april-hugo/blob/main/static/images/april-vulkan.svg)
+[Vulcan Pipeline](https://github.com/jthing/april-hugo/blob/main/static/images/april-vulkan.svg)
