@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>April - APL as a sublanguage of Common LIsp - April - APL embedded in Common Lisp</title>
+
+    
+    
+    <meta name="description" content="April Array Programming Re-Imagined in Lisp Ken Iverson&rsquo;s masterpiece reflected in the medium of Lisp.
+April compiles a subset of the APL programming language into Common Lisp. Leveraging Lisp&rsquo;s powerful macros and numeric processing faculties, it brings APL&rsquo;s expressive potential to bear for Lisp developers. Replace hundreds of lines of number-crunching code with a single line of APL.
+Why April? APL veritably hums with algorithmic power. As a handful of characters run past the lexer, vast fields of data grow, morph and distil to reveal their secrets." />
+    <meta name="author" content="" />
+    
+
+    <link href="https://unpkg.com/@master/normal.css" rel="stylesheet">
+    <script src="https://unpkg.com/@master/style@1.5.0"></script>
+    <script src="https://unpkg.com/@master/styles@1.13.0"></script>
+    <script src="https://unpkg.com/master-styles-group"></script>
+    <script src="https://unpkg.com/themes.js"></script>
+    <script>window.themes = window.themes || new window.Themes()</script>
+
+    <style>
+        :root {
+            --font-sans: "Inter var", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+        }
+    </style></head>
+<body class="bg:fade-84@dark font:fade-16@dark font:sans">
+    <nav class="w:full h:90 fixed bg:fade-84/.95@dark bg:white z:1000">
+    <div class="
+        h:full
+        w:full
+        max-w:1200
+        mx:auto
+        px:32
+        d:flex
+        align-items:center
+    ">
+        <div>
+            <a href="/" class="mr-3 font:extralight">
+              
+              April - APL embedded in Common Lisp
+              
+            </a>
+        </div>
+
+        <div class="ml:auto">
+            
+            
+            
+        </div>
+    </div>
+</nav>
+<div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
+        <div class="max-w:700 w:full box:content-box">
+<article class="box:border-box pt:32">
+    <header class="mb:32">
+        <div class="font:40 font:extrabold">April - APL as a sublanguage of Common LIsp</div>
+        <div class="mt:16 f:fade-60">
+            <time>Jul 9, 2023</time>
+            </div>
+    </header><div class="
+    _:where(a):hover{text-decoration-color:fade}
+    _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
+    _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
+    _:where(code){font:90%;_v:middle}
+    _:where(code:not(.highlight_*,pre_*)){p:2;6;_r:4}
+    _:where(del){text-decoration:1;line-through;fade-68;_text-decoration-color:red-64@dark}
+    _:where(figcaption){text:14;_p:10;20;0;_width:fit;_mx:auto;_font:fade-56;_font:fade-57@dark}
+    _:where(h1){font:40;_font:extrabold}
+    _:where(h1,h2,h3)+:where(h1,h2,h3){mt:.5em}
+    _:where(h1,h2,h3,h4,h5,h6){mt:2em}
+    _:where(h2){mb:1em;_font:32}
+    _:where(h3){font:24}
+    _:where(h4){font:20}
+    _:where(h5){font:16}
+    _:where(h6){font:14}
+    _:where(li)::marker{font:fade-44;_font:fade-68@dark}
+    _:where(li){pl:.375em}
+    _:where(mark){text-decoration:1;underline;#fce016;_bg:transparent;_text-decoration-color:rgb(252;224;22/.5)@dark}
+    _:where(p,li){font:fade-76;_font:16;_line-height:1.65;_font:fade-34@dark}
+    _:where(p,pre,blockquote,figure,ul,ol,table){my:1.125em}
+    >:first-child{mt:0!}
+    _:where(pre){p:20;_r:8;_overflow:auto}
+    _:where(pre,code:not(.highlight_*)){bg:fade-2;_bg:fade-92!@dark}
+    _:where(strong,b,a,code:not(.highlight_*),mark,del){font:fade-92;_font:fade-12@dark}
+    _:where(table){width:full;_border-spacing:0}
+    _:where(td){v:baseline}
+    _:where(td,th):first-child{pl:0}
+    _:where(td,th):last-child{pr:0}
+    _:where(td,th){bb:1;solid;fade-92/.06;_p:6;_b:fade-4/.04@dark}
+    _:where(th){font:fade-78;_font:14;_text:left;_font:fade-12@dark}
+    _:where(th,p_code,li_code,a,mark){font:semibold;_font:medium@dark}
+    _:where(ul){list-style-type:disc}
+    _:where(ul,ol,blockquote){pl:1.5em}
+    _:where(video,img){max-width:full}
+    _:where(a,mark){text-underline-offset:3}
+    _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
+"><!-- raw HTML omitted -->
+<h1 id="april">April</h1>
+<!-- raw HTML omitted -->
+<h4 id="array-programming-re-imagined-in-lisp">Array Programming Re-Imagined in Lisp</h4>
+<hr>
+<p>Ken Iverson&rsquo;s masterpiece reflected in the medium of Lisp.</p>
+<p>April compiles a subset of the APL programming language into Common Lisp. Leveraging
+Lisp&rsquo;s powerful macros and numeric processing faculties, it brings APL&rsquo;s expressive
+potential to bear for Lisp developers. Replace hundreds of lines of number-crunching code
+with a single line of APL.</p>
+<h2 id="why-april">Why April?</h2>
+<p>APL veritably hums with algorithmic power. As a handful of characters run past the lexer,
+vast fields of data grow, morph and distil to reveal their secrets. However, APL has
+hitherto dwelt in an ivory tower, secluded inside monolithic runtime environments. If you
+have a store of data you&rsquo;d like to process with APL, getting it there can be an ordeal
+akin to hauling tons of cargo on donkeys&rsquo; backs through a narrow mountain pass. The
+original APL interpreters ran on mainframes whose only input was the keyboard and only
+output was the printer and the legacy of that implementation approach has persisted to
+this day, limiting the reach of the language.</p>
+<p>But no longer. Lisp is the great connector of the software world, digesting and
+transforming semantic patterns in much the same way that APL works upon numeric
+patterns. With APL inside of Lisp, databases, streams, binary files and other media are
+just a few lines of code away from processing with APL.</p>
+<h3 id="discussion">Discussion</h3>
+<p>For the time being, discussion of April and its development is happening on the
+<code>##phantomics</code> channel on irc.libera.chat.</p>
+<h2 id="support-aprils-development">Support April&rsquo;s Development</h2>
+<p>If you&rsquo;d like to help provide for continuing work on April, you can <a href="https://www.patreon.com/lisp">contribute through
+Patreon</a>. April is making fast and steady progress toward
+the goal of being a powerful, full-featured and professional APL implementation, whose
+ease of extension and integration with other software offers game-changing advantages in
+the vector language field. Did you know that April&rsquo;s code at the beginning of December
+2021 was over 95% different from its code at the beginning of September 2020?</p>
+<h2 id="april-media-and-publications">April Media and Publications</h2>
+<h3 id="arraycast-interview">ArrayCast interview</h3>
+<p><a href="https://www.arraycast.com/episodes/episode23-andrew-sengul">Developer interview exploring April&rsquo;s history and
+features</a></p>
+<h3 id="apl-seeds-presentation">APL Seeds Presentation</h3>
+<p><a href="https://youtube.com/watch?v=Wxaqu8E83gE">Presentation of April at Dyalog&rsquo;s APL Seeds &lsquo;22
+conference</a></p>
+<h3 id="lispnyc-april-compiler-presentation">LispNYC April compiler presentation</h3>
+<p><a href="https://youtube.com/watch?v=AUEIgfj9koc">Video outline and panel discussion showing early April
+design</a></p>
+<h3 id="european-lisp-symposium-2022-paper">European Lisp Symposium 2022 paper</h3>
+<p><a href="https://doi.org/10.5281/zenodo.6337140">April: APL Compiling to Common Lisp</a></p>
+<h2 id="compatibility-with-common-lisp-implementations">Compatibility with Common Lisp Implementations</h2>
+<p>April puts the numeric and array processing capabilities of Common Lisp to the test. It
+has been verified to work with SBCL, CCL, ECL, ABCL, Clasp, Allegro CL and LispWorks. SBCL
+and CCL are considered fully compatible with no special provisions made in order to
+function. ECL and Clasp pass all tests with the help of some specific provisions
+addressing their differences from other CL implementations. ABCL passes all main tests
+with the help of some special provisions and all dfn tests except those in the tree
+library, which cannot be loaded due to limitations of the underlying Java virtual
+machine. Allegro CL and LispWorks both have a few compatibility issues causing failures of
+dfn tests. <a href="./compatibility-notes.md">See this document for a list of all differences in functionality between
+implementations.</a></p>
+<h2 id="automatic-installation">Automatic Installation</h2>
+<p>April is supplied by the Quicklisp library manager, so the easiest way to install April is
+through Quicklisp. To install April with Quicklisp, evaluate:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(ql:quickload <span style="color:#e6db74">&#39;april</span>)
+</span></span></code></pre></div><h2 id="manual-installation">Manual Installation</h2>
+<p>If you&rsquo;d like to install April manually from this repository, you can follow these
+instructions.</p>
+<h3 id="cloning-the-repository">Cloning the Repository</h3>
+<p>First, clone the repository to a location on your system. For this example, let&rsquo;s say you
+cloned it to the directory ~/mystuff/april.</p>
+<h3 id="preparing-quicklisp">Preparing Quicklisp</h3>
+<p>Enter your Quicklisp local-projects directory (usually ~/quicklisp/local-projects) and
+create a symbolic link to the directory where you cloned the April repository. For
+example, if you cloned the repo to ~/mystuff/april and your Quicklisp directory is
+~/quicklisp/, enter:</p>
+<pre tabindex="0"><code>cd ~/quicklisp/local-projects
+ln -s ~/mystuff/april
+</code></pre><h3 id="installing-dependencies">Installing Dependencies</h3>
+<p>To complete the installation, just start a Common Lisp REPL and enter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(ql:quickload <span style="color:#e6db74">&#39;april</span>)
+</span></span></code></pre></div><p>This will download and install April&rsquo;s dependencies, and with that the package will be
+built and ready.</p>
+<h2 id="apl-functions-and-operators">APL Functions and Operators</h2>
+<p>The APL language uses single characters to represent its primitive functions and
+operators. Most of these symbols are not part of the standard ASCII character set but are
+unique to APL. To see a list of the glyphs that are supported by April, visit the link
+below.</p>
+<h4 id="see-the-complete-april-apl-lexicon-herelexiconmd"><a href="./lexicon.md">See the complete April APL lexicon here.</a></h4>
+<p>Some APL functions and operators won&rsquo;t be added to April since they don&rsquo;t make sense for
+April&rsquo;s design as a compiler from APL to Lisp. Others may be added in the future. <a href="#whats-not-planned-for-implementation">See the
+list of features not implemented here.</a></p>
+<h2 id="getting-to-know-apl">Getting to Know APL</h2>
+<p>A full guide to the APL language is far beyond the scope of this file, but here are links
+to some good sources.</p>
+<p><a href="http://archive.vector.org.uk/art10011550">A high-level introduction to APL.</a></p>
+<p><a href="http://microapl.com/APL/tutorial_contents.html">This is a detailed language tutorial covering most of the functions and operators in
+April.</a></p>
+<p><a href="https://www.jsoftware.com/papers/tot.htm">The original paper by Ken Iverson, creator of APL, detailing the language&rsquo;s underlying
+philosophy.</a></p>
+<p>If you would like a quick tour of the language, April includes a function that will print
+demos of all the commands and many APL syntax features. To see the demos, enter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (demo))
+</span></span></code></pre></div><p>The <code>*</code> indicates a REPL prompt. Prepare for a long read. The demo content that gets
+printed will tell you the name(s) of the operations that correspond to each symbol and
+will hopefully give you some idea of what each one does.</p>
+<h3 id="how-to-enter-apl-characters">How to Enter APL Characters</h3>
+<p>In order to write APL programs you&rsquo;ll need a way to use the language&rsquo;s special character
+set.</p>
+<p><a href="#enabling-apl-input-in-emacs">Click here for information on enabling APL input within
+Emacs.</a></p>
+<p><a href="#enabling-apl-input-in-vim">Click here for information on enabling APL input within Vim.</a></p>
+<p><a href="#enabling-apl-input-universally-in-gnulinux">Click here for information on enabling APL input universally within
+GNU/Linux.</a></p>
+<h2 id="basic-evaluation-april-and-april-f">Basic Evaluation: (april) and (april-f)</h2>
+<p>Evaluating an APL expression is as simple as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;1+2 3 4&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>As above, the <code>*</code> indicates a REPL prompt and the text below is the expression&rsquo;s output.</p>
+<p>The macro <code>(april-f)</code> (short for april-format) will evaluate any APL string passed to it
+as the sole argument, returning the final result. Using <code>(april-f)</code> will also produce a
+printout of the output in APL&rsquo;s traditional array printing style, which appears before the
+actual output value. You can see above how the <code>3 4 5</code> is printed out before the value
+<code>#(3 4 5)</code>. APL-style printed arrays are easier to read than Lisp&rsquo;s style of printing
+arrays; APL can use a simpler style to express its output because it doesn&rsquo;t have as many
+different data types and structures as Lisp.</p>
+<p>If you don&rsquo;t need to see the printout, you can use the plain <code>(april)</code> macro. Like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;1+2 3 4&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>You should use <code>(april)</code> if you&rsquo;re using April to do calculations inside of a larger
+program and don&rsquo;t need the printout. Otherwise, especially if you&rsquo;re working with large
+data sets, the system may consume significant resources printing out the results of
+calculations.</p>
+<p>Setting state properties for the APL instance can be done like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><p>Instead of an APL string, the first argument to <code>(april)</code> or <code>(april-f)</code> may be a list of
+parameters for the APL environment. The APL expression is then passed in the second
+argument.</p>
+<p>For example, you can use the <code>:count-from</code> parameter to determine whether functions in the
+evaluated APL code will start counting from 0 or 1. We&rsquo;ll get into more detail on how
+these parameters work later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">1</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><p>More APL expressions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span>  <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>  <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>) (<span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>) (<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;+/3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">26</span> <span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">26</span> <span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;+⌿3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">21</span> <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">21</span> <span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;+/[1]3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">21</span> <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">21</span> <span style="color:#ae81ff">24</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;⌽3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">4</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">8</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">12</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span>) (<span style="color:#ae81ff">8</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">5</span>) (<span style="color:#ae81ff">12</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;1⌽3 4⍴⍳12&#34;</span>)
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">2</span>  <span style="color:#ae81ff">3</span>  <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#ae81ff">6</span>  <span style="color:#ae81ff">7</span>  <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">1</span>) (<span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">5</span>) (<span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">9</span>))
+</span></span></code></pre></div><h3 id="a-note-on-escaping-characters">A note on escaping characters</h3>
+<p>April uses the backslash character <code>\</code> to implement the expand function and the scan
+operator. Because of the way Lisp strings work, this character must be escaped with a
+second <code>\</code> before it in order to enter APL code containing backslashes. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;+\\⍳5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">15</span>)
+</span></span></code></pre></div><p>Inside the <code>&quot;string&quot;</code>, the two backslashes evaluate to a single backslash. If you forget
+about this, you can run into confusing errors.</p>
+<h2 id="unique-language-features-in-april">Unique Language Features in April</h2>
+<p>For the most part, April&rsquo;s syntax and functions follow standard APL conventions. But there
+are a few areas where April differs from typical APL implementations along with some
+unique language features. Most notably:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#75715e">;; k-style if-statements</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;x←5 ⋄ $[x&gt;3;8;12]&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; k-style functions with any number of named arguments</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;monthlyPayment←{[amt;int;len] (len÷⍨amt×int×0.1)+amt÷len} ⋄ monthlyPayment[5000;0.8;12]&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">450.0d0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; numbered branch points instantiated with →⎕ syntax</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;x←1 ⋄ →1+1 ⋄ x×←11 ⋄ 1→⎕ ⋄ x×←3 ⋄ 2→⎕ ⋄ x×←5 ⋄ 3→⎕ ⋄ x×←7&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">35</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; symbol-referenced branch points and a branch function with expression-determined branch symbol choice</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;x←1 ⋄ (5-3)→two three ⋄ x×←11 ⋄ one→⎕ ⋄ x×←3 ⋄ two→⎕ ⋄ x×←5 ⋄ three→⎕ ⋄ x×←7&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; ⍶ and ⍹ are used to reference values passed as operands to a user-defined operator</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;&#39;*&#39; {⍶,⍵} &#39; b c d&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;* b c d&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; if the operands passed to a user-defined operator are to be functions,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; ⍺⍺ and ⍵⍵ are used as in other APLs</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;(2∘|) {(⍺⍺¨⍵)/⍵} ⍳20&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">9</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">19</span>)
+</span></span></code></pre></div><p>The biggest difference between April and other APLs lies in its implementation of the <code>→ branch</code> function, as shown in the third and fourth examples above. April also allows you
+to use if-statements and functions with any number of named arguments in the style of
+Arthur Whitney&rsquo;s k programming language.</p>
+<p>Because of April&rsquo;s nature as a compiler, user-defined operators use different symbols to
+refer to operands depending whether the operands are values or functions. The underlined
+characters <code>⍶</code> and <code>⍹</code> are used to refer to the operands as values, while the doubled
+characters <code>⍺⍺</code> and <code>⍵⍵</code> refer to the operands as functions. The presence of both <code>⍶</code> and
+<code>⍺⍺</code> or both <code>⍹</code> and <code>⍵⍵</code> in a defined operator will cause an error.</p>
+<h3 id="using-rational-numbers">Using rational numbers</h3>
+<p>April is one of a few APL implementations to include rational numbers. They are printed
+with a lowercase <code>r</code> separating the numerator and denominator. Examples:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;÷⍳5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> 1r2 1r3 1r4 1r5
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">1/2</span> <span style="color:#ae81ff">1/3</span> <span style="color:#ae81ff">1/4</span> <span style="color:#ae81ff">1/5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;2r3×⍳4&#34;</span>)
+</span></span><span style="display:flex;"><span>2r3 4r3 <span style="color:#ae81ff">2</span> 8r3
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">2/3</span> <span style="color:#ae81ff">4/3</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">8/3</span>)
+</span></span></code></pre></div><p>Rational numbers can also be used as parts of complex numbers:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;3r4J9r5×⍳4&#34;</span>)
+</span></span><span style="display:flex;"><span>3r4J9r5 3r2J18r5 9r4J27r5 3J36r5
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">3/4</span> <span style="color:#ae81ff">9/5</span>) <span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">3/2</span> <span style="color:#ae81ff">18/5</span>) <span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">9/4</span> <span style="color:#ae81ff">27/5</span>) <span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">36/5</span>))
+</span></span></code></pre></div><h3 id="underscores-within-numbers">Underscores within numbers</h3>
+<p>In April, you can use underscores to separate parts of a number:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;1_000_000+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1000005</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;1__000_000__000_000+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1000000000005</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;1_00___0_0__00_0+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10000005</span>
+</span></span></code></pre></div><p>As shown above, you can use any number of underscores anywhere within a number, they are
+simply ignored by the reader. Underscores are also used by the printer when printing
+columns of mixed complex floats and rationals:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;⍪12.2J99.11 3J8 19r13J5r2&#34;</span>)
+</span></span><span style="display:flex;"><span>12.20J99.11
+</span></span><span style="display:flex;"><span> 3___J_8   
+</span></span><span style="display:flex;"><span>19r13J_5r_2
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">12.2</span> <span style="color:#ae81ff">99.11</span>)) (<span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">8</span>)) (<span style="color:#ae81ff">#C</span>(<span style="color:#ae81ff">19/13</span> <span style="color:#ae81ff">5/2</span>)))
+</span></span></code></pre></div><p>Using the underscores as filler keeps the decimal points, rs and Js properly aligned for
+printing.</p>
+<h3 id="strings-and-escaped-quotes">Strings and escaped quotes</h3>
+<p>In April, either single or double quotes can be used to enclose character strings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;&#39;abc&#39;,&#39;def&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;abcdef&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;\&#34;ghi\&#34;,\&#34;jkl\&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;ghijkl&#34;</span>
+</span></span></code></pre></div><p>Note that you must use backslashes to escape double quotes used within Lisp strings,
+making double quotes a less desirable choice unless you&rsquo;re loading April code from files
+using <code>(april-load)</code>. In order to escape quote characters within an April string, enter
+the quote character twice. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;&#39;\&#39;abc&#39;\&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#39;abc&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;&#39;&#39;&#39;abc&#39;&#39;&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#39;abc&#39;&#34;</span>
+</span></span></code></pre></div><h2 id="compact-function-calls-the-april-c-macro">Compact Function Calls: The (april-c) Macro</h2>
+<p>Want to invoke April functions on some variables with less code? You can use the
+<code>(april-c)</code> macro. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{⍺×⍵}&#34;</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;×&#34;</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">8</span>) <span style="color:#75715e">;; the same result as above by passing a string containing just &#39;×&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{[a;b;c;d] d↑c⍴a+b}&#34;</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">8</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span> <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><p>After the string where the April function is written, pass the variables that will be
+input to the function and you&rsquo;ll receive the result with no need for a long <code>(with (:state ...))</code> clause. If you wish to pass parameters in a <code>(with)</code> clause, you can still do it
+with <code>(april-c)</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;{⍳⍵}&#34;</span> <span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>)
+</span></span></code></pre></div><p>The arguments passed to <code>(april-c)</code> are in the order <code>⍵ ⍺</code>. This may seem
+counterintuitive:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{⍵-⍺}&#34;</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><p>But keep in mind that a function must always have a right argument, but may or may not
+have a left argument. Therefore it&rsquo;s easier to remember that the first argument after the
+function string is always the right argument, and the second argument, if present, is the
+left argument.</p>
+<p>The <code>(april-c)</code> macro can also be used to compose inline operators with functions. For
+example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{⍺⍺/⍵}&#34;</span> <span style="color:#a6e22e">#&#39;+</span> <span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{⍵⍵ ⍺⍺/⍵}&#34;</span> <span style="color:#a6e22e">#&#39;+</span> <span style="color:#a6e22e">#&#39;-</span> <span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">-15</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-c <span style="color:#e6db74">&#34;{⍵⍵ ⍺ ⍺⍺/⍵}&#34;</span> <span style="color:#a6e22e">#&#39;+</span> (scalar-function <span style="color:#a6e22e">-</span>) <span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>) <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">-6</span> <span style="color:#ae81ff">-9</span> <span style="color:#ae81ff">-12</span>) 
+</span></span></code></pre></div><p>Note that in operators where a right operand is expected (i.e. those that contain a <code>⍵⍵</code>
+or <code>⍹</code> symbol), two operands are expected following the code string. In an operator taking
+only a left operand, whose code doesn&rsquo;t include <code>⍵⍵</code> or <code>⍹</code>, one operand is expected
+following the code string. The arguments to <code>(april-c)</code> for an operator are in the order
+<code>⍺⍺/⍶ (⍵⍵/⍹ if present) ⍵ (⍺ if present)</code>. The left operand comes first in the arguments
+because all operators must have a left operand, but they may or may not have a right
+operand.</p>
+<p>Keep in mind that standard Common Lisp functions like <code>#'+</code> do not operate on entire
+arrays like APL functions do. In order to pass scalar functions into April via <code>(april-c)</code>
+that can be composed with operators and work as you expect scalar functions to when doing
+operations like <code>- 3 +/⍳5</code>, you must pass those functions&rsquo; symbols through the
+<code>(scalar-function)</code> macro as seen above with <code>(scalar-function -)</code>.</p>
+<h2 id="parameter-reference">Parameter reference</h2>
+<p>When <code>(april)</code> or <code>(april-f)</code> is called, you may pass it either a single text string:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;1+1 2 3&#34;</span>)
+</span></span></code></pre></div><p>Or a parameter object followed by a text string:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span></code></pre></div><p>This section details the parameters you can pass to April.</p>
+<h3 id="test">(test)</h3>
+<p>To run April&rsquo;s test suite, just enter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (test))
+</span></span></code></pre></div><h3 id="demo">(demo)</h3>
+<p>As mentioned before, you can see demos of April&rsquo;s functions with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (demo))
+</span></span></code></pre></div><h3 id="with">(with)</h3>
+<p><code>(with)</code> is the workhorse of April parameters, allowing you to specify many options for an
+April invocation. The most common sub-parameter passed via <code>(with)</code> is <code>(:state)</code>. To wit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">:in</span> ((a <span style="color:#ae81ff">3</span>) (b <span style="color:#ae81ff">5</span>))
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">:out</span> (a c)))
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;c←a+⍳b&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span>)
+</span></span></code></pre></div><h3 id="state-sub-parameters">(:state) sub-parameters</h3>
+<p>Let&rsquo;s learn some more about what&rsquo;s going on in that code. The sub-parameters of <code>(:state)</code>
+are:</p>
+<h4 id="count-from">:count-from</h4>
+<p>Sets the index from which April counts. Almost always set to 0 or 1. The default value
+is 1. In the code above, <code>⍳b</code> with <code>b</code> equal to 5 counts from 0 to 4, whereas with the
+default <code>:count-from</code> value of 1, <code>⍳b</code> would count from 1 to 5. When you set :count-from,
+it only affects the APL code evaluated in the expression to which the :count-from option
+is passed. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>)
+</span></span></code></pre></div><h4 id="in">:in</h4>
+<p>Passes variables into the April instance that may be used when evaluating the subsequent
+expressions. In the example above, the variables <code>a</code> and <code>b</code> are set in the code, with
+values 1 and 2 respectively. You can use <code>:in</code> to pass values from Lisp into the April
+instance.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:in</span> ((a <span style="color:#ae81ff">5</span>) (b <span style="color:#ae81ff">10</span>))))
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;1+2+a×b&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">53</span>
+</span></span></code></pre></div><p>Please note that April variables follow a stricter naming convention than Lisp
+variables. When naming the input variables, only alphanumeric characters, underscores and
+dashes may be used. In keeping with APL tradition, the delta/triangle characters ∆ and ⍙
+can be used in variable names as well. Punctuation marks like ?, &gt;, . and ! may not be
+used as they have separate meanings in April.</p>
+<p>These characters are allowed in variable names within April:</p>
+<pre tabindex="0"><code>0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_∆⍙
+</code></pre><p>These variable names are ok for use with the <code>:in</code> parameter:</p>
+<pre tabindex="0"><code>a var my_var another-var
+</code></pre><p>These are not ok:</p>
+<pre tabindex="0"><code>true! this-&gt;that pass/fail? var.name
+</code></pre><p>If you use dashes in the names of Lisp variables you pass into April, note that inside
+April they will be converted to camel case. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:in</span> ((one-var <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>                              (other-var <span style="color:#ae81ff">5</span>))))
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;oneVar×otherVar+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">20</span>
+</span></span></code></pre></div><p>The dash character <code>-</code> is used to denote the subtraction function inside April, so you may
+not use dashes in variable names within the language.</p>
+<p>One more caveat: it&rsquo;s best to avoid using input variable names with a dash before a number
+or other non-letter symbol. The dash will be removed and the character following it will
+cannot be capitalized so information will have been lost. For example:</p>
+<pre tabindex="0"><code>my-var-2 → myVar2
+my-var-∆ → myVar∆
+</code></pre><h4 id="an-important-note-about-modifying-arrays-passed-to-april"><strong>An important note about modifying arrays passed to April</strong></h4>
+<p>When passing array values into April via <code>:in</code> or direct function calls using <code>(april-c)</code>,
+be advised that assinging new values to their elements <em>may or may not</em> destructively
+modify the original arrays. Whether destructive modification happens depends on whether
+the values assigned are compatible with the element type of the original arrays. Here is
+an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(<span style="color:#66d9ef">let</span> ((a <span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)) (b <span style="color:#f92672">#(</span><span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>))
+</span></span><span style="display:flex;"><span>      (c (<span style="color:#a6e22e">make-array</span> <span style="color:#ae81ff">3</span> <span style="color:#e6db74">:element-type</span> <span style="color:#f92672">&#39;</span>(<span style="color:#66d9ef">unsigned-byte</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">:initial-contents</span> <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>)))
+</span></span><span style="display:flex;"><span>      (d (<span style="color:#a6e22e">make-array</span> <span style="color:#ae81ff">3</span> <span style="color:#e6db74">:element-type</span> <span style="color:#f92672">&#39;</span>(<span style="color:#66d9ef">unsigned-byte</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>                       <span style="color:#e6db74">:initial-contents</span> <span style="color:#f92672">&#39;</span>(<span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>))))
+</span></span><span style="display:flex;"><span>  (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:in</span> ((a a) (b b) (c c) (d d))))
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;a[1]←20 ⋄ (⊃b)←30 ⋄ c[1]←40 ⋄ (⊃d)←50&#34;</span>)
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">vector</span> a b c d))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(#(</span><span style="color:#ae81ff">20</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#f92672">#(</span><span style="color:#ae81ff">30</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span>) <span style="color:#f92672">#(</span><span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>) <span style="color:#f92672">#(</span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>))
+</span></span></code></pre></div><p>The first two T-type vectors are destructively modified since they are compatible with the
+elements being assigned. The second two vectors of 4-bit integers are copied and
+reassigned within the April invocation because they are not compatible with the values
+being assigned, and those the original arrays are left intact.</p>
+<h4 id="out">:out</h4>
+<p>Lists variables to be output when the code has finished evaluating. By default, the value
+of the last evaluated expression is passed back after an April evaluation is finished. For
+example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;1+2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            2+3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            3+4&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">7</span>
+</span></span></code></pre></div><p>The last value calculated is displayed. The <code>:out</code> sub-parameter allows you to list a set
+of variables that whose values will be returned once evaluation is complete. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:out</span> (a b c)))
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#34;a←9+2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            b←5+3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            c←2×9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">18</span>
+</span></span></code></pre></div><h4 id="index-origin">:index-origin</h4>
+<p>This is another, more technical name for the <code>:count-from</code> sub-parameter. You can use it
+instead of <code>:count-from</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:index-origin</span> <span style="color:#ae81ff">0</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><h4 id="print-precision">:print-precision</h4>
+<p>This controls the maximal precision at which April prints floating point numbers. Its
+default value is 10. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f <span style="color:#e6db74">&#34;○1 2 3&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.141592654</span> <span style="color:#ae81ff">6.283185307</span> 9.424777961	
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3.141592653589793d0</span> <span style="color:#ae81ff">6.283185307179586d0</span> <span style="color:#ae81ff">9.42477796076938d0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:print-precision</span> <span style="color:#ae81ff">6</span>)) <span style="color:#e6db74">&#34;○1 2 3&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.14159</span> <span style="color:#ae81ff">6.28319</span> <span style="color:#ae81ff">9.42478</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3.141592653589793d0</span> <span style="color:#ae81ff">6.283185307179586d0</span> <span style="color:#ae81ff">9.42477796076938d0</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:print-precision</span> <span style="color:#ae81ff">3</span>)) <span style="color:#e6db74">&#34;○1 2 3&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3.14</span> <span style="color:#ae81ff">6.28</span> <span style="color:#ae81ff">9.42</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">3.141592653589793d0</span> <span style="color:#ae81ff">6.283185307179586d0</span> <span style="color:#ae81ff">9.42477796076938d0</span>)
+</span></span></code></pre></div><p>Note that <code>:print-precision</code> doesn&rsquo;t affect the Lisp values output by April, only the
+printed output.</p>
+<h4 id="print-to">:print-to</h4>
+<p>When using <code>(april-f)</code>, the formatted array content is output to the <code>*standard-output*</code>
+stream. When using <code>(april)</code>, no formatted output is printed. You can change this using
+the <code>:print-to</code> sub-parameter. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:print-to</span> *standard-output*)) <span style="color:#e6db74">&#34;2 3⍴⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) (<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:print-to</span> <span style="color:#66d9ef">nil</span>)) <span style="color:#e6db74">&#34;2 3⍴⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) (<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>))
+</span></span></code></pre></div><p>Using the <code>:print-to</code> parameter effectively erases the distinction between <code>(april)</code> and
+<code>(april-f)</code>. The two different macros are provided as a courtesy so you don&rsquo;t need to pass
+a <code>:print-to</code> parameter to get printed output. You can also pass a different stream than
+<code>*standard-output*</code> to <code>:print-to</code> to have the printed output directed there.</p>
+<h4 id="output-printed">:output-printed</h4>
+<p>When the <code>:output-printed</code> sub-parameter is passed, the string of APL-formatted data that
+gets printed will also be returned as the last output value by the April invocation. For
+example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:output-printed</span> <span style="color:#66d9ef">t</span>)) <span style="color:#e6db74">&#34;2 3⍴⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) (<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>))
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;1 2 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4 5 6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>If you don&rsquo;t want to receive the Lisp value output by April and only want the formatted
+string as output, you can pass the <code>:only</code> option to <code>:output-printed</code>, like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:output-printed</span> <span style="color:#e6db74">:only</span>)) <span style="color:#e6db74">&#34;2 3⍴⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;1 2 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4 5 6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>This way, the formatted string will be the only returned value.</p>
+<h3 id="space-parameter">(:space) parameter</h3>
+<p>If you want to create a persistent workspace where the functions and variables you&rsquo;ve
+created are stored and can be used in multiple calls to April, you must first create the
+workspace. Here&rsquo;s how:</p>
+<pre tabindex="0"><code>* (april-create-workspace space1)
+&#34;Successfully created workspace ｢SPACE1｣.&#34;
+</code></pre><p>Then, to evaluate April code within use the <code>(:space)</code> parameter. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;a←5+2 ⋄ b←3×9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;c←{⍵+2}&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>&lt;FUNCTION <span style="color:#f92672">...</span> <span style="color:#a6e22e">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;c a+b&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">36</span>
+</span></span></code></pre></div><p>In the above example, a workspace called <code>space1</code> is created, two variables and a function
+are stored within it, and then the function is called on the sum of the variables.</p>
+<p>When you invoke <code>(april)</code> without naming a workspace, a workspace called <code>common</code> is used.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:space</span> common)) <span style="color:#e6db74">&#34;a←5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;a+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><h3 id="store-val-and-store-fun-parameters">(:store-val) and (:store-fun) parameters</h3>
+<p>If you&rsquo;d like to add values and functions from the Lisp instance into an April workspace,
+you can use the <code>(:store-val)</code> and <code>(:store-fun)</code> parameters. Here is an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:store-val</span> (a <span style="color:#ae81ff">12</span>) (b <span style="color:#ae81ff">45</span>))) <span style="color:#e6db74">&#34;a+b+10&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">67</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;3×a&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">36</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:store-fun</span> (add-ten (lambda (x) (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">10</span>))))) <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">NIL</span> <span style="color:#75715e">;; the result of not running code after the function is stored</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;addTen 20&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">30</span>
+</span></span></code></pre></div><p>As shown above, dash-separated variable and function names are converted to camel case,
+just as when passing input values with the <code>:in</code> sub-parameter of <code>(:state)</code>. Note also
+that functions passed into April this way are not adapted for use with arrays the way that
+functions created within April are. For instance, if you enter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:store-fun</span> (add-ten (lambda (x) (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">10</span>))))) <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">NIL</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;addTen 1 2 3 4 5&#34;</span>)
+</span></span></code></pre></div><p>You will get an error stating something like <code>The value #(1 2 3 4 5) is not of type NUMBER ...</code>. That&rsquo;s because in Lisp, you can&rsquo;t add 10 to the vector <code>#(1 2 3 4 5)</code>, which is what
+the function is attempting to do. Use caution when adding arbitrary Lisp functions into an
+April workspace.</p>
+<p>If you want to store functions or variables with names that are read literally rather than
+being converted to camel case, you can do this by passing strings as the variable
+names. If a dash is found in such a string-expressed variable name it will cause an
+error. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(april (with (<span style="color:#e6db74">:store-fun</span> (<span style="color:#e6db74">&#34;aBcDe&#34;</span> (lambda (x) (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">10</span>))))) <span style="color:#e6db74">&#34;aBcDe 5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; the presence of a dash causes an error</span>
+</span></span><span style="display:flex;"><span>(april (with (<span style="color:#e6db74">:store-fun</span> (<span style="color:#e6db74">&#34;ab-cd&#34;</span> (lambda (x) (<span style="color:#a6e22e">+</span> x <span style="color:#ae81ff">10</span>))))) <span style="color:#e6db74">&#34;abcd 6&#34;</span>)
+</span></span><span style="display:flex;"><span>Error: Invalid characters present in <span style="color:#a6e22e">symbol</span> aBC-deF passed to <span style="color:#e6db74">:STORE-FUN.</span>
+</span></span></code></pre></div><h3 id="compile-only-parameter">(:compile-only) parameter</h3>
+<p>If you just want to compile the code you enter into April without running it, use this
+option. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:compile-only</span>)) <span style="color:#e6db74">&#34;1+1 2 3&#34;</span>)
+</span></span><span style="display:flex;"><span>(IN-APRIL-WORKSPACE COMMON
+</span></span><span style="display:flex;"><span>  (LET ((OUTPUT-STREAM *STANDARD-OUTPUT*))
+</span></span><span style="display:flex;"><span>    (DECLARE (IGNORABLE OUTPUT-STREAM))
+</span></span><span style="display:flex;"><span>    (SYMBOL-MACROLET ((INDEX-ORIGIN <span style="color:#960050;background-color:#1e0010">⊑</span>*INDEX-ORIGIN*)
+</span></span><span style="display:flex;"><span>                      (PRINT-PRECISION <span style="color:#960050;background-color:#1e0010">⊑</span>*PRINT-PRECISION*)
+</span></span><span style="display:flex;"><span>                      (COMPARISON-TOLERANCE <span style="color:#960050;background-color:#1e0010">⊑</span>*COMPARISON-TOLERANCE*)
+</span></span><span style="display:flex;"><span>                      (DIVISION-METHOD <span style="color:#960050;background-color:#1e0010">⊑</span>*DIVISION-METHOD*)
+</span></span><span style="display:flex;"><span>                      (RNGS <span style="color:#960050;background-color:#1e0010">⊑</span>*RNGS*))
+</span></span><span style="display:flex;"><span>      (A-OUT (A-CALL (APL-FN-S <span style="color:#a6e22e">+</span>) (AVEC <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>) <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">:PRINT-PRECISION</span>
+</span></span><span style="display:flex;"><span>             PRINT-PRECISION))))
+</span></span></code></pre></div><h3 id="print-tokens-parameter">(:print-tokens) parameter</h3>
+<p>April compiles code in two stages: first, the lexer converts the string of characters into
+lists of tokens, then the compiler takes those tokens and uses them to generate Common
+Lisp code based on grammar elements and patterns. You can see the implementation of
+April&rsquo;s grammar in <a href="./grammar.lisp">the grammar source file</a>.</p>
+<p>If you&rsquo;d like to see the lists of tokens the lexer generates for a given APL expression,
+you can see them by passing the <code>(:print-tokens)</code> parameter.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:print-tokens</span>)) <span style="color:#e6db74">&#34;(⍳4)+⍤1⊢3 4⍴⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">9</span> (<span style="color:#e6db74">:FN</span> <span style="color:#e6db74">#\APL_FUNCTIONAL_SYMBOL_IOTA</span>) (<span style="color:#e6db74">:FN</span> <span style="color:#e6db74">#\APL_FUNCTIONAL_SYMBOL_RHO</span>) <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span> (<span style="color:#e6db74">:FN</span> <span style="color:#e6db74">#\RIGHT_TACK</span>) <span style="color:#ae81ff">1</span> (<span style="color:#e6db74">:OP</span> <span style="color:#e6db74">:PIVOTAL</span> <span style="color:#e6db74">#\APL_FUNCTIONAL_SYMBOL_JOT_DIAERESIS</span>)
+</span></span><span style="display:flex;"><span> (<span style="color:#e6db74">:FN</span> <span style="color:#e6db74">#\+</span>) (<span style="color:#ae81ff">4</span> (<span style="color:#e6db74">:FN</span> <span style="color:#e6db74">#\APL_FUNCTIONAL_SYMBOL_IOTA</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">#2A</span>((<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">8</span>) (<span style="color:#ae81ff">6</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">10</span> <span style="color:#ae81ff">12</span>) (<span style="color:#ae81ff">10</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">7</span>))
+</span></span></code></pre></div><h2 id="clearing-workspaces-the-april-clear-workspace-macro">Clearing Workspaces: The (april-clear-workspace) Macro</h2>
+<p>You can use this macro to clear a workspace, removing all user-created variables within it
+and returning it to its default state. For example, to clear a workspace called <code>space1</code>,
+enter:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-clear-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;The workspace ｢SPACE1｣ has been cleared.&#34;</span>
+</span></span></code></pre></div><h2 id="references-to-april-workspace-contents-the-april-ref-function">References to April Workspace Contents: The (april-ref) Function</h2>
+<p>If you&rsquo;d like to easily fetch a value or function from an April workspace within Common
+Lisp code, you can use the <code>(april-ref)</code> function. It works like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;v←⍳3&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (<span style="color:#a6e22e">length</span> (april-ref <span style="color:#e6db74">&#39;|v|</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;fn←{⍵+5}&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>&lt;FUNCTION <span style="color:#f92672">...</span><span style="color:#a6e22e">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (<span style="color:#a6e22e">funcall</span> (april-ref <span style="color:#e6db74">&#34;fn&#34;</span>) <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">15</span>
+</span></span></code></pre></div><p>The arguments to <code>(april-ref)</code> can be strings or symbols (which will be converted to
+strings). Since <code>(april-ref)</code> is a function and not a macro you can construct strings to
+pass to it as arguments like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;abcdef←×&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span>&lt;FUNCTION <span style="color:#f92672">...</span><span style="color:#a6e22e">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (<span style="color:#a6e22e">funcall</span> (april-ref (<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;~a~a&#34;</span> <span style="color:#e6db74">&#34;abc&#34;</span> <span style="color:#e6db74">:|def|</span>)) <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span>
+</span></span></code></pre></div><p>By default <code>(april-ref)</code> fetches items from the default <code>common</code> workspace. By passing two
+arguments you can choose the workspace to use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;v←25&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (<span style="color:#a6e22e">*</span> <span style="color:#ae81ff">3</span> (april-ref (<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;SPACE~a&#34;</span> <span style="color:#ae81ff">1</span>) <span style="color:#e6db74">:|v|</span>))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">75</span>
+</span></span></code></pre></div><h2 id="sharing-scope-the-with-april-context-macro">Sharing Scope: The (with-april-context) Macro</h2>
+<p>Perhaps you&rsquo;d like to make multiple calls to April using the same workspace and other
+parameters and you don&rsquo;t want to have to enter the same parameters over and over
+again. The <code>(with-april-context)</code> macro can help. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (with-april-context ((<span style="color:#e6db74">:space</span> space1) (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:index-origin</span> <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>    (april <span style="color:#e6db74">&#34;g←5&#34;</span>)
+</span></span><span style="display:flex;"><span>    (april <span style="color:#e6db74">&#34;g×3+⍳9&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">20</span> <span style="color:#ae81ff">25</span> <span style="color:#ae81ff">30</span> <span style="color:#ae81ff">35</span> <span style="color:#ae81ff">40</span> <span style="color:#ae81ff">45</span> <span style="color:#ae81ff">50</span> <span style="color:#ae81ff">55</span>)
+</span></span></code></pre></div><p>Inside the body of the <code>(with-april-context)</code> macro, each of the <code>(april)</code> invocations act
+as if they were passed the options <code>(with (:space space1) (:state :index-origin 0))</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (with-april-context ((<span style="color:#e6db74">:space</span> space1) (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:index-origin</span> <span style="color:#ae81ff">0</span>))
+</span></span><span style="display:flex;"><span>    (april <span style="color:#e6db74">&#34;x←⍳3&#34;</span>)
+</span></span><span style="display:flex;"><span>    (april (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:index-origin</span> <span style="color:#ae81ff">1</span>)) <span style="color:#e6db74">&#34;x,⍳5&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>Options passed for one of the <code>(april)</code> invocations inside the context will override the
+options for the context. Here, the second <code>(april)</code> invocation has its index origin set to
+1 which overrides the context&rsquo;s 0 value.</p>
+<h2 id="console-output-using-the-quad-character">Console Output Using the Quad Character</h2>
+<p>The <code>(april-f)</code> macro is one way to view the printed output of APL expressions. What if
+you want to see the result of an evaluation that occurs in the middle of your code instead
+of the end, or if you want to print the contents of multiple arrays within a single
+expression? At times like these, you can use the <code>⎕</code> character, also called &ldquo;quad.&rdquo; In
+APL, console output can be produced by &ldquo;assigning&rdquo; values to <code>⎕</code> like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;a←1 2 3 ⋄ b←3+⎕←2+a ⋄ ⎕←c←4+b ⋄ c+5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span>)
+</span></span></code></pre></div><p>Both of the values assigned to <code>⎕</code> are printed in order before the expression&rsquo;s final
+result is output. Because <code>(april)</code> is used instead of <code>(april-f)</code>, no formatted values
+are printed by default; only the values assigned to <code>⎕</code> are printed. Using <code>⎕</code>, it&rsquo;s easy
+to debug complex functions.</p>
+<h2 id="loading-code-directly-from-files">Loading Code Directly From Files</h2>
+<p>Perhaps you&rsquo;d like to write files containing pure APL code rather than passing strings to
+<code>(april)</code> within Lisp code. The <code>(april-load)</code> macro has you covered. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apl" data-lang="apl"><span style="display:flex;"><span><span style="color:#75715e">⍝ contents of file test.apl</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>v  <span style="color:#66d9ef">←</span> <span style="color:#f92672">⍳</span><span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>fn <span style="color:#66d9ef">←</span> <span style="color:#66d9ef">{</span>⍵<span style="color:#f92672">+</span><span style="color:#ae81ff">10</span><span style="color:#66d9ef">}</span>
+</span></span><span style="display:flex;"><span>⎕  <span style="color:#66d9ef">←</span> fn v
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-load <span style="color:#ae81ff">#P&#34;/path/to/test.apl&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">19</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april <span style="color:#e6db74">&#34;fn 3 4 5&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span>)
+</span></span></code></pre></div><p>The variable <code>v</code> and the function <code>fn</code> have been loaded into the default workspace.</p>
+<p>Note that the argument to <code>(april-load)</code> must be a pathname, not merely a string. The
+argument to <code>(april-load)</code> may also be an expression that evaluates to a pathname. For
+instance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-load (<span style="color:#a6e22e">pathname</span> (<span style="color:#a6e22e">format</span> <span style="color:#66d9ef">nil</span> <span style="color:#e6db74">&#34;~a/test.apl&#34;</span> <span style="color:#e6db74">&#34;/test/directory&#34;</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">19</span>)
+</span></span></code></pre></div><p>The <code>(april-load)</code> macro may take a first argument containing the same parameters that can
+be passed to <code>(april)</code>. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-load (with (<span style="color:#e6db74">:space</span> space1) (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:index-origin</span> <span style="color:#ae81ff">0</span>)) <span style="color:#ae81ff">#P&#34;/path/to/test.apl&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">10</span> <span style="color:#ae81ff">11</span> <span style="color:#ae81ff">12</span> <span style="color:#ae81ff">13</span> <span style="color:#ae81ff">14</span> <span style="color:#ae81ff">15</span> <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">17</span> <span style="color:#ae81ff">18</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;fn 9 8 7&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">19</span> <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">17</span>)
+</span></span></code></pre></div><p>Source code from files can thus be loaded into any workspace.</p>
+<h2 id="apl-system-variables-and-functions-in-april">APL System Variables and Functions in April</h2>
+<p>April makes available the following APL system variables, constants and functions:</p>
+<pre tabindex="0"><code>⎕IO ⎕CT ⎕PP ⎕DIV ⎕RL ⎕A ⎕D ⎕TS ⎕NS ⎕CS ⎕UCS ⎕FMT
+</code></pre><p>Additionally, April exposes these system variables and functions not found in other APL
+implementations:</p>
+<pre tabindex="0"><code>⎕OST ⎕TY ⎕XWV ⎕XWF ⎕XWO
+</code></pre><p><a href="./environmental-symbols.md">Click here to read the names and descriptions of these
+symbols.</a></p>
+<h2 id="about-workspace-variables-index-origin-and-print-precision">About Workspace Variables: Index Origin and Print Precision</h2>
+<p>Above, you learned how to use the <code>:count-from</code>/<code>:index-origin</code> and <code>:print-precision</code>
+sub-parameters to control how April counts and prints. Using these parameters with an
+April invocation will affect <em>only</em> the code passed to that particular April
+invocation. What if you want to create a change in these parameters that will persist in a
+given workspace until it&rsquo;s changed again?</p>
+<p>Traditional APL dialects use the <code>⎕IO</code> and <code>⎕PP</code> system variables to set the index origin
+and print precision in a workspace, and using them in April will make a change that
+persists in the workspace. For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space2)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE2｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;⎕IO←0 ⋄ ⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space2)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>)
+</span></span></code></pre></div><p>Switching to the workspace <code>space2</code>, the default index origin of 1 is used again.</p>
+<p>If you pass an <code>:index-origin</code>, <code>:count-from</code> or <code>:print-precision</code> sub-parameter to an
+APL invocation, it will override whatever value is present in the active
+workspace. However, it will only affect the code passed to the individual <code>(april)</code>
+invocation that has the sub-parameter(s) passed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-create-workspace space1)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Successfully created workspace ｢SPACE1｣.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;⎕IO←0 ⋄ ⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:state</span> <span style="color:#e6db74">:count-from</span> <span style="color:#ae81ff">1</span>)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">9</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april-f (with (<span style="color:#e6db74">:space</span> space1)) <span style="color:#e6db74">&#34;⍳9&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>)
+</span></span></code></pre></div><h2 id="setting-a-custom-output-stream">Setting a Custom Output Stream</h2>
+<p>April has a system variable called <code>⎕ost</code> that you can use to set a custom destination for
+printed output. Normally, data output using <code>(april-f)</code> or values assigned to the quad
+character like <code>⎕←1 2 3</code> are sent to the <code>*standard-output*</code> stream. You can change this
+as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (<span style="color:#66d9ef">let*</span> ((out-str (<span style="color:#a6e22e">make-string-output-stream</span>))
+</span></span><span style="display:flex;"><span>	 (<span style="color:#a6e22e">vector</span> (april-f <span style="color:#e6db74">&#34;a←1 2 3 ⋄ ⎕ost←&#39;OUT-STR&#39; ⋄ ⎕←a+5 ⋄ ⎕←3 4 5 ⋄ ⎕ost←&#39;*STANDARD-OUTPUT*&#39; ⋄ 3+a&#34;</span>)))
+</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">princ</span> (<span style="color:#a6e22e">get-output-stream-string</span> out-str))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">vector</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span> <span style="color:#ae81ff">7</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span> <span style="color:#ae81ff">6</span>)
+</span></span></code></pre></div><p>Within the APL expression, the output stream is set to <code>OUT-STR</code>, two vectors are output
+to that stream, and then the stream is reset to <code>*STANDARD-OUTPUT*</code> before the expression
+ends and prints its final output. When the code runs, first the APL-formatted output from
+the <code>(april-f)</code> expression is printed. Then, the two APL-formatted strings output to the
+<code>out-str</code> stream are printed. Finally, the Lisp vector that resulted from the <code>(april-f)</code>
+expression is printed.</p>
+<p>Remember to use all caps when setting the <code>⎕ost</code> variable, unless your desired output
+stream is referenced by a literal lowercase symbol like <code>|output-stream|</code>.</p>
+<p>The syntax above assumes that the symbol representing the output stream is internal to the
+current package. For instance:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(in-package <span style="color:#e6db74">#:pkg-one</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defvar out-str (<span style="color:#a6e22e">make-string-output-stream</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(april-f <span style="color:#e6db74">&#34;⎕ost←&#39;OUT-STR&#39; ⋄ 5+10&#34;</span>)
+</span></span></code></pre></div><p>In this code, the <code>OUT-STR</code> output stream is interned in the package <code>PKG-ONE</code>. What if
+you want to use an output stream whose symbol belongs to a package other than the current
+one?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span>(in-package <span style="color:#e6db74">#:pkg-one</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(defvar out-str (<span style="color:#a6e22e">make-string-output-stream</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(in-package <span style="color:#e6db74">#:pkg-two</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(april-f <span style="color:#e6db74">&#34;⎕ost←(&#39;PKG-ONE&#39; &#39;OUT-STR&#39;) ⋄ 5+10&#34;</span>)
+</span></span></code></pre></div><p>If you assign to <code>⎕ost</code> a vector of two strings, the first string is the name of a package
+and the second string is the name of a symbol belonging to that package. In this way, you
+can reference an output stream whose symbol is interned in a package other than the
+current one.</p>
+<h2 id="referencing-variables-functions-and-operators-in-another-workspace">Referencing Variables, Functions and Operators in Another Workspace</h2>
+<p>A difference between April and other APLs is the way in which workspaces are
+handled. Because April workspaces are modeled as Lisp software packages, it&rsquo;s possible to
+include things from one workspace in another in much the same way you do with Common
+Lisp&rsquo;s <code>(defpackage)</code> macro. In other APLs, a workspace is more akin to the complete
+application state of an APL interpreter, so sharing items between them is more complicated
+to implement.</p>
+<p>Below is an example of items shared between workspaces.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:space</span> first-space))
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;V1←10 ⋄ V2←20 ⋄ F←{10×⍺÷⍵} ⋄ G←⍴∘,&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (with (<span style="color:#e6db74">:space</span> second-space))
+</span></span><span style="display:flex;"><span>         <span style="color:#e6db74">&#34;A B ← &#39;FIRST-SPACE&#39; ⎕XWV &#39;V1&#39; &#39;V2&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          H I ← &#39;FIRST-SPACE&#39; ⎕XWF &#39;F&#39; &#39;G&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          A B H I A B&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">#(</span><span style="color:#ae81ff">5</span> <span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>The <code>V1</code> and <code>V2</code> variables from <code>first-space</code> are referenced as <code>A</code> and <code>B</code> while the
+<code>Fn1</code> and <code>Fn2</code> variables are referenced as <code>H</code> and <code>I</code> respectively. Operators can also
+be referenced with <code>⎕XWO</code>.</p>
+<h2 id="whats-not-planned-for-implementation">What&rsquo;s Not Planned for Implementation</h2>
+<h4 id="functions">Functions:</h4>
+<pre tabindex="0"><code>⍇ File read
+⍈ File write
+⍐ File hold
+⍗ File drop
+⎕ Evaluated input
+⎕ Output with newline
+⍞ Character input
+⍞ Bare output
+</code></pre><h4 id="operators">Operators:</h4>
+<pre tabindex="0"><code>&amp; Spawn
+⌶ I-Beam
+</code></pre><p><a href="./lexicon.md">(Click here to see the functions and operators that have been
+implemented.)</a></p>
+<p>See a pattern? The functions not planned for implentation are all those that manifest
+low-level interactions between the APL instance and the underlying computer system. Common
+Lisp already has powerful tools for system interaction, so it&rsquo;s presumed that developers
+will do things like this outside of April.</p>
+<h2 id="also-not-implemented">Also Not Implemented</h2>
+<p>APL&rsquo;s function editor system and control statements are not implemented; this type of
+functionality is also readily accessible through standard Common Lisp. Also, rather than
+using control statements like <code>:If</code>, April approaches the need for such structures with
+lexical statements like <code>$[]</code>.</p>
+<h2 id="aprils-lexicon-compared-to-other-apls">April&rsquo;s Lexicon Compared to Other APLs</h2>
+<p>APL has multiple implementations and there are subtle but significant variations between
+the lexical functions they offer. April&rsquo;s set of functions is closest to those offered by
+Dyalog APL in its default mode. For instance, in April dyadic <code>⊂</code> implements the
+partitioned enclose function while dyadic <code>⊆</code> implements the partition function, as in
+Dyalog. In IBM APL2, however, there is no partitioned enclose function and dyadic <code>⊂</code>
+implements the partition function. The same is true in GNU APL, whose design primarily
+follows APL2.</p>
+<p>The other major lexical difference between APL2-family languages and April is that in
+April, monadic <code>⊃</code> implements the disclose function and monadic <code>↑</code> implements the mix
+function; the converse is true in APL2.</p>
+<p>Dyalog APL offers users the option of using multiple lexical modes, some of which are more
+similar to APL2. The variable controlling the active mode is referred to as the &ldquo;migration
+level.&rdquo; The implementation of migration levels in April is not planned at this time.</p>
+<h2 id="tests-demo-and-the-extended-demo-suite">Tests, Demo and the Extended Demo Suite</h2>
+<p>If you missed it earlier, you can run tests for the implemented APL functions and
+operators by entering:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (test))
+</span></span></code></pre></div><p>And you can see a demonstration of April language features by entering:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lisp" data-lang="lisp"><span style="display:flex;"><span><span style="color:#a6e22e">*</span> (april (demo))
+</span></span></code></pre></div><p>April comes with a set of standard libraries and demo packages implementing useful APL
+functions. The libraries are located in <a href="/libraries">this repository&rsquo;s <code>/libraries</code>
+folder</a>, and the demo packages are located in <a href="/demos">the <code>/demos</code> folder</a>,
+and each library package has its own set of tests. You can load the libraries by
+evaluating <code>(load-libs)</code> and run the tests for each demo by evaluating <code>(run-lib-tests)</code>
+within the <code>april</code> package. The library tests contain many complex functions that generate
+large arrays, giving the computer a workout. On slower systems these tests may take some
+time to complete.</p>
+<h2 id="enabling-apl-input-in-emacs">Enabling APL Input in Emacs</h2>
+<p>Most Lisp developers interact with the language through Emacs, so Emacs is also the most
+convenient tool to write April programs. John Thingstad has created a dedicated Emacs APL
+input mode for April, you can download it and read instructions at <a href="https://github.com/jthing/apl-mode">its
+repository</a>.</p>
+<p>Another way to input APL characters in Emacs is using the gnu-apl-mode Emacs plugin. You
+can get it <a href="https://github.com/lokedhs/gnu-apl-mode">from the repository here</a> or install
+it directly via the MELPA Emacs package repository.</p>
+<p><a href="http://ergoemacs.org/emacs/emacs_package_system.html">Click here for information on using
+MELPA.</a></p>
+<p>Once gnu-apl-mode is installed, you can switch to the APL input mode by typing <code>M-x toggle-input-method</code> or <code>C-\</code>. You will be prompted to enter the input mode to use, so
+enter <code>APL-Z</code> and then you&rsquo;ll be able to toggle APL input on and off by typing
+<code>C-\</code>. While in APL-Z input mode, you can enter APL characters by prefixing the key with a
+<code>.</code> period character.</p>
+<h2 id="enabling-apl-input-in-vim">Enabling APL Input in Vim</h2>
+<p>For Lisp developers who interact with the language through Vim, a plugin called &ldquo;vim-apl&rdquo;
+allows one to input APL characters. You can get it <a href="https://github.com/justin2004/vim-apl">from this git
+repository</a>. Using a Vim plugin manager called
+<a href="https://github.com/VundleVim/Vundle.vim">Vundle</a> it is easy to add this plugin by adding
+the single line <code>Plugin 'justin2004/vim-apl'</code> to your .vimrc and following the Vundle
+instructions. With vim-apl installed, while editing an .apl file you can enter the iota
+character <code>⍳</code> by typing <code>`i</code> (backtick and i), enter the rho character <code>⍴</code> by typing
+<code> `r</code>, and so on.</p>
+<h2 id="enabling-apl-input-universally-in-gnulinux">Enabling APL Input Universally in GNU/Linux</h2>
+<p>For GNU/Linux users who&rsquo;d like use APL characters outside of a customized editor, refer to
+<a href="https://aplwiki.com/wiki/Typing_glyphs_on_Linux">this page</a> on the APL Wiki. After
+following the instructions there you&rsquo;ll be able to use your keyboard&rsquo;s right Alt key as a
+modifier to enter APL characters. For instance, you enter can the iota character <code>⍳</code> by
+pressing the <code>right Alt + i</code>, the rho character <code>⍴</code> by pressing the <code>right Alt + r</code> and so
+on.</p>
+<p>Another option for GNU/Linux APL input is to enter <code>setxkbmap us,apl -option grp:win_switch</code> in a terminal. The keyboard&rsquo;s win keys will become modifiers that allow
+you to enter APL characters when held down. Typing <code>Win + r</code> will produce <code>⍴</code>, for
+example, and typing <code>Win + %</code> will produce <code>⌽</code>.</p>
+<h2 id="thanks-to">Thanks to:</h2>
+<p>Tamas K. Papp, creator of <a href="https://github.com/tpapp/array-operations">array-operations</a>,
+the basis for some of April&rsquo;s early function implementations.</p>
+<p>Max Rottenkolber, creator of <a href="https://github.com/eugeneia/maxpc">MaxPC</a>, the heart of
+April&rsquo;s parsing engine.</p>
+<p><a href="https://github.com/justin2004">justin2004</a> and <a href="https://github.com/egao1980">Nikolai
+Matiushev</a>, contributors of many bug reports and suggestions.</p>
+</div></article>
+<footer class="py:24">
+    <div class="f:fade-30 f:14 mb:8"></div>
+    <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>
+</footer></div>
+    </div>
+</body>
+
+</html>
