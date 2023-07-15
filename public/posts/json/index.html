@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html><head>
-	<meta name="generator" content="Hugo 0.115.1">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>April - APL embedded in Common Lisp</title>
+    <title>JSON Reader - April - APL embedded in Common Lisp</title>
 
     
     
-    <meta name="description" content="" />
+    <meta name="description" content="JSON reader for Vulcan There are numerous JSON readers in Common Lisp. See JSON review. I don&rsquo;t like any of them. They are over-complicated and translate into a binary lisp format that is hard to read and debug without using the inspector. A JSON file can all be read with plist&rsquo;s and lists.
+There are numerous options and steps involved in setting up a Vulcan pipeline. They involve setting at on of &lt;something&gt;Info structures and then calling the functions." />
     <meta name="author" content="" />
     
 
@@ -37,7 +37,7 @@
         align-items:center
     ">
         <div>
-            <a href="./" class="mr-3 font:extralight">
+            <a href="../../" class="mr-3 font:extralight">
               
               April - APL embedded in Common Lisp
               
@@ -53,7 +53,13 @@
 </nav>
 <div class="d:flex flex:column@<=sm pt:90 px:24 jc:center gap:44 word-break:break-word">
         <div class="max-w:700 w:full box:content-box">
-<div class="d:flex flex:col"><div class="
+<article class="box:border-box pt:32">
+    <header class="mb:32">
+        <div class="font:40 font:extrabold">JSON Reader</div>
+        <div class="mt:16 f:fade-60">
+            <time>Jul 15, 2023</time>
+            </div>
+    </header><div class="
     _:where(a):hover{text-decoration-color:fade}
     _:where(a){text-decoration:2;underline;fade-10;_text-decoration-color:fade-70@dark}
     _:where(blockquote){bl:5;solid;fade-76/.1;_bl:5;solid;fade-34/.1@dark}
@@ -90,63 +96,21 @@
     _:where(video,img){max-width:full}
     _:where(a,mark){text-underline-offset:3}
     _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
-"></div><h2 class="my:1em">Posts</h2><div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/json/">
-        JSON Reader
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 15, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/hal/">
-        APL and SPIR
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 11, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/la-lectures/">
-        Linear Algebra Lectures
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 11, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/ex-hugo/">
-        ox-hugo
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 11, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/u-net/">
-        U-net CNN in APL
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 11, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/april-gpu/">
-        April GPU
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 9, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/april/">
-        April - APL as a sublanguage of Common LIsp
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Jul 9, 2023</time></div>
-    
-</div>
-<div class="mb:12 py:8">
-    <a class="f:18! font:semibold! f:fade-30! text-decoration:none f:fade-10!:hover transition:150ms;ease-in" href="//jpthing.github.io/april-hugo/posts/journal/">
-        Journal
-    </a>
-    <div class="mt:12 f:14 f:fade-60"><time>Feb 23, 2023</time></div>
-    
-</div>
-</div>
+"><h2 id="json-reader-for-vulcan">JSON reader for Vulcan</h2>
+<p>There are numerous JSON readers in Common Lisp.
+See <a href="https://sabracrolleton.github.io/json-review.html#standard-conformity">JSON review</a>.
+I don&rsquo;t like any of them. They are over-complicated and translate into a binary lisp
+format that is hard to read and debug without using the inspector.
+A JSON file can all be read with plist&rsquo;s and lists.</p>
+<p>There are numerous options and steps involved in setting up a Vulcan pipeline. They
+involve setting at on of &lt;something&gt;Info structures and then calling the functions. The
+sequence is deterministic across different pipe setting. My idea is to set it up in the same
+way as cascading style sheets. Set up a YAML file with the settings for a generic compute
+pipeline. Convert it to JSON. Then convert it to plist format. For each &lt;something&gt;Info
+structure you need to set look it up and use the values from the plist.</p>
+<p>The idea of the cascade is that you only need to specific the values that differ from the
+default. If you prefer plist of JSON format that is fine too just check the file extension.</p>
+</div></article>
 <footer class="py:24">
     <div class="f:fade-30 f:14 mb:8"></div>
     <div class="f:fade-60 f:12">Theme <a class="f:bold" href="https://github.com/serkodev/holy" _target="_blank">Holy</a></div>

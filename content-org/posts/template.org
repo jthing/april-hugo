@@ -1,0 +1,20 @@
+#+TITLE: #title
+#+AUTHOR: John Thingstad
+#+DATE: #date
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* #headline
+
+#content
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso
