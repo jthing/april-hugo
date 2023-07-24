@@ -6,7 +6,17 @@
     <description>Recent content in Posts on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 23 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>APL DNN tutorial</title>
+      <link>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</link>
+      <pubDate>Mon, 24 Jul 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</guid>
+      <description>APL neural net tutorial The “Learn APL with Neural Networks” YouTube series aims at teaching you APL while building a basic machine learning framework from the ground up.
+By the time you are done, you will have created a machine learning framework and used it to train a neural network that recognises handwritten digits. You will also be able to tackle other problems you pick because of the flexibility of what you created!</description>
+    </item>
+    
     <item>
       <title>GLSL</title>
       <link>//jpthing.github.io/april-hugo/posts/glsl/</link>
@@ -97,16 +107,6 @@ Why April? APL veritably hums with algorithmic power. As a handful of characters
       <description>2023 2023-02 februar 2023-02-23 torsdag 11:17 - april GPU journal
 Research ways of letting APL run on a GPU. In paricular a april extension. (April is a APL library for Common Lisp wich extestions for Dylog APL but relies on CL for IO.)
 APL to GPU slides for discussion on dylogs attempts. Rapids is a library for doing all calculation on the GPU. It contains cudf a library which is a drop in replacement for pandas but which performs the operation on the GPU.</description>
-    </item>
-    
-    <item>
-      <title>APL DNN tutorial</title>
-      <link>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</guid>
-      <description>APL neural net tutorial The “Learn APL with Neural Networks” YouTube series aims at teaching you APL while building a basic machine learning framework from the ground up.
-By the time you are done, you will have created a machine learning framework and used it to train a neural network that recognises handwritten digits. You will also be able to tackle other problems you pick because of the flexibility of what you created!</description>
     </item>
     
   </channel>

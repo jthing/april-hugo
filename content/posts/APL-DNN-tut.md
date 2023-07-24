@@ -1,5 +1,6 @@
 ---
 title: "APL DNN tutorial"
+date: 2023-07-24T00:00:00+02:00
 draft: false
 ---
 

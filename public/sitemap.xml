@@ -2,13 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//jpthing.github.io/april-hugo/</loc>
-    <lastmod>2023-07-23T00:00:00+02:00</lastmod>
+    <loc>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</loc>
+    <lastmod>2023-07-24T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>//jpthing.github.io/april-hugo/posts/glsl/</loc>
-    <lastmod>2023-07-23T00:00:00+02:00</lastmod>
+    <loc>//jpthing.github.io/april-hugo/</loc>
+    <lastmod>2023-07-24T00:00:00+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/</loc>
+    <lastmod>2023-07-24T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>//jpthing.github.io/april-hugo/posts/glsl/</loc>
     <lastmod>2023-07-23T00:00:00+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/json/</loc>
@@ -34,8 +37,6 @@
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/journal/</loc>
     <lastmod>2023-02-23T00:00:00+01:00</lastmod>
-  </url><url>
-    <loc>//jpthing.github.io/april-hugo/posts/apl-dnn-tut/</loc>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/categories/</loc>
   </url><url>

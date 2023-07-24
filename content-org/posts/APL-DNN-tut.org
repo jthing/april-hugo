@@ -1,6 +1,6 @@
 #+TITLE: APL DNN tutorial
 #+AUTHOR: John Thingstad
-#+DATE: #date
+#+DATE: <2023-07-24 ma.>
 #+OPTIONS: author:nil
 
 #+hugo_base_dir: ~/Dokumenter/April
