@@ -1,0 +1,29 @@
+#+TITLE: APL DNN tutorial
+#+AUTHOR: John Thingstad
+#+DATE: #date
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* APL neural net tutorial
+
+The “Learn APL with Neural Networks” YouTube series aims at teaching you APL while
+building a basic machine learning framework from the ground up.
+
+By the time you are done, you will have created a machine learning framework and used it
+to train a neural network that recognises handwritten digits.  You will also be able to
+tackle other problems you pick because of the flexibility of what you created!
+
+[Learn APL with Neural Networks](https://www.youtube.com/playlist?list=PLgTqamKi1MS3p-O0QAgjv5vt4NY5OgpiM)
+
+#content
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso DNN
