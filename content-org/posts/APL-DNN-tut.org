@@ -18,8 +18,6 @@ tackle other problems you pick because of the flexibility of what you created!
 
 [Learn APL with Neural Networks](https://www.youtube.com/playlist?list=PLgTqamKi1MS3p-O0QAgjv5vt4NY5OgpiM)
 
-#content
-
 # Local Variables:
 # eval: (set-fill-column 90)
 # eval: (auto-fill-mode t)

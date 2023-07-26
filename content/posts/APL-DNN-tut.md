@@ -14,5 +14,3 @@ to train a neural network that recognises handwritten digits.  You will also be 
 tackle other problems you pick because of the flexibility of what you created!
 
 [Learn APL with Neural Networks](<https://www.youtube.com/playlist?list=PLgTqamKi1MS3p-O0QAgjv5vt4NY5OgpiM>)
-
-\#content
