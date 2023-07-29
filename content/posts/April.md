@@ -1032,7 +1032,7 @@ implementations:
 ```
 
 [Click here to read the names and descriptions of these
-symbols.](/data/environmental-symbols.md)
+symbols.](/files/environmental-symbols.md)
 
 ## About Workspace Variables: Index Origin and Print Precision
 
