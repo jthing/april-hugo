@@ -6,7 +6,16 @@
     <description>Recent content on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 27 Jul 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ANNAPL</title>
+      <link>//jpthing.github.io/april-hugo/posts/annapl/</link>
+      <pubDate>Wed, 02 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/annapl/</guid>
+      <description>Artificial Neural Nets in APL ANNAPL is a github cite with a example neural net implementation in APL. In particular notice mnistdata.rar which is the handwritten character data in 128x128 pixel gray-format encoded as a compressed CSV file. I will need this data as the original data cite yann.lecun.com is now password protected. Not sure why, but I suspect the traffic given the recent influx in DNN&amp;rsquo;s has become to great for his server to handle.</description>
+    </item>
+    
     <item>
       <title>fashion-MNIST</title>
       <link>//jpthing.github.io/april-hugo/posts/fashionmnist/</link>
