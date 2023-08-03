@@ -6,7 +6,18 @@
     <description>Recent content on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IEEE754</title>
+      <link>//jpthing.github.io/april-hugo/posts/ieee754/</link>
+      <pubDate>Thu, 03 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/ieee754/</guid>
+      <description>Half precision floating point To fully support GPU programming April needs a new floating point formats.
+In APL floating point is set by setting ⎕FR to a number representing the IEEE standard number so ⎕FR←754 sets the precision to 16 bit floating point. For more information see (Wikipedia)[https://en.wikipedia.org/wiki/Half-precision_floating-point_format].
+#content</description>
+    </item>
+    
     <item>
       <title>ANNAPL</title>
       <link>//jpthing.github.io/april-hugo/posts/annapl/</link>

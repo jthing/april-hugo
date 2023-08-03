@@ -1,0 +1,25 @@
+#+TITLE: IEEE754
+#+AUTHOR: John Thingstad
+#+DATE: <2023-08-03 to.>
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Half precision floating point
+To fully support GPU programming April needs a new floating point formats.
+
+In APL floating point is set by setting ⎕FR to a number representing the IEEE standard
+number so ⎕FR←754 sets the precision to 16 bit floating point.
+For more information see (Wikipedia)[https://en.wikipedia.org/wiki/Half-precision_floating-point_format].
+
+#content
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso
