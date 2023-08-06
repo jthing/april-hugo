@@ -1,6 +1,7 @@
 #+TITLE: #title
 #+AUTHOR: John Thingstad
 #+DATE: #date
+#+FILETAGS: 
 #+OPTIONS: author:nil
 
 #+hugo_base_dir: ~/Dokumenter/April

@@ -14,8 +14,7 @@
       
       <guid>//jpthing.github.io/april-hugo/posts/ieee754/</guid>
       <description>Half precision floating point To fully support GPU programming April needs a new floating point formats.
-In APL floating point is set by setting ⎕FR to a number representing the IEEE standard number so ⎕FR←754 sets the precision to 16 bit floating point. For more information see (Wikipedia)[https://en.wikipedia.org/wiki/Half-precision_floating-point_format].
-#content</description>
+In APL floating point is set by setting ⎕FR to a number representing the IEEE standard number so ⎕FR←754 sets the precision to 16 bit floating point. For more information see Wikipedia.</description>
     </item>
     
     <item>
@@ -136,6 +135,15 @@ Why April? APL veritably hums with algorithmic power. As a handful of characters
       <description>2023 2023-02 februar 2023-02-23 torsdag 11:17 - april GPU journal
 Research ways of letting APL run on a GPU. In paricular a april extension. (April is a APL library for Common Lisp wich extestions for Dylog APL but relies on CL for IO.)
 APL to GPU slides for discussion on dylogs attempts. Rapids is a library for doing all calculation on the GPU. It contains cudf a library which is a drop in replacement for pandas but which performs the operation on the GPU.</description>
+    </item>
+    
+    <item>
+      <title>#title</title>
+      <link>//jpthing.github.io/april-hugo/posts/template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/template/</guid>
+      <description>#headline #content</description>
     </item>
     
   </channel>
