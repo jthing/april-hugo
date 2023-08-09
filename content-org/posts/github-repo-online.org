@@ -1,4 +1,4 @@
-#+TITLE: github repo online
+#+TITLE: github repository online
 #+AUTHOR: John Thingstad
 #+DATE: <2023-08-09 on.>
 #+FILETAGS: none
@@ -8,7 +8,6 @@
 #+hugo_selection: posts
 #+hugo_front_matter_format: yaml
 
-* Github repository online
 Now posted on [[https://github.com/jthing/april-gpu][april-gpu]]. For the moment doesn't do anything just basic build structure.
 Will load the necessary lisp libraries if you try to build it
 
