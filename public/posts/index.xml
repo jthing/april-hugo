@@ -6,7 +6,16 @@
     <description>Recent content in Posts on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 09 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>github repo online</title>
+      <link>//jpthing.github.io/april-hugo/posts/github-repo-online/</link>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/github-repo-online/</guid>
+      <description>Github repository online Now posted on april-gpu. For the moment doesn&amp;rsquo;t do anything just basic build structure. Will load the necessary lisp libraries if you try to build it</description>
+    </item>
+    
     <item>
       <title>IEEE754</title>
       <link>//jpthing.github.io/april-hugo/posts/ieee754/</link>
@@ -135,15 +144,6 @@ Why April? APL veritably hums with algorithmic power. As a handful of characters
       <description>2023 2023-02 februar 2023-02-23 torsdag 11:17 - april GPU journal
 Research ways of letting APL run on a GPU. In paricular a april extension. (April is a APL library for Common Lisp wich extestions for Dylog APL but relies on CL for IO.)
 APL to GPU slides for discussion on dylogs attempts. Rapids is a library for doing all calculation on the GPU. It contains cudf a library which is a drop in replacement for pandas but which performs the operation on the GPU.</description>
-    </item>
-    
-    <item>
-      <title>#title</title>
-      <link>//jpthing.github.io/april-hugo/posts/template/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>//jpthing.github.io/april-hugo/posts/template/</guid>
-      <description>#headline #content</description>
     </item>
     
   </channel>

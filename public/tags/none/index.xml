@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>none on April - APL embedded in Common Lisp</title>
+    <link>//jpthing.github.io/april-hugo/tags/none/</link>
+    <description>Recent content in none on April - APL embedded in Common Lisp</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 09 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/tags/none/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>github repo online</title>
+      <link>//jpthing.github.io/april-hugo/posts/github-repo-online/</link>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/github-repo-online/</guid>
+      <description>Github repository online Now posted on april-gpu. For the moment doesn&amp;rsquo;t do anything just basic build structure. Will load the necessary lisp libraries if you try to build it</description>
+    </item>
+    
+  </channel>
+</rss>
