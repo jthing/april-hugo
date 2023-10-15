@@ -1,0 +1,22 @@
+#+title:      april-gpu
+#+date:       <2023-10-15 sø.>
+#+filetags:   :april:
+#+identifier: 20231015T2202
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* April-GPU first version is finished
+
+Though there is still some debugging left the code is now complete.
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso
+

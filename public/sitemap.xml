@@ -2,19 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>//jpthing.github.io/april-hugo/tags/april/</loc>
+    <lastmod>2023-10-15T00:00:00+02:00</lastmod>
+  </url><url>
     <loc>//jpthing.github.io/april-hugo/</loc>
-    <lastmod>2023-08-09T00:00:00+02:00</lastmod>
+    <lastmod>2023-10-15T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>//jpthing.github.io/april-hugo/posts/april-gpu/</loc>
+    <lastmod>2023-10-15T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>//jpthing.github.io/april-hugo/posts/</loc>
+    <lastmod>2023-10-15T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>//jpthing.github.io/april-hugo/tags/</loc>
+    <lastmod>2023-10-15T00:00:00+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/github-repo-online/</loc>
     <lastmod>2023-08-09T00:00:00+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/tags/none/</loc>
-    <lastmod>2023-08-09T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>//jpthing.github.io/april-hugo/posts/</loc>
-    <lastmod>2023-08-09T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>//jpthing.github.io/april-hugo/tags/</loc>
     <lastmod>2023-08-09T00:00:00+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/ieee754/</loc>
@@ -46,9 +52,6 @@
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/u-net/</loc>
     <lastmod>2023-07-11T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>//jpthing.github.io/april-hugo/posts/april-gpu/</loc>
-    <lastmod>2023-07-09T13:09:24+02:00</lastmod>
   </url><url>
     <loc>//jpthing.github.io/april-hugo/posts/april/</loc>
     <lastmod>2023-07-09T11:43:38+02:00</lastmod>

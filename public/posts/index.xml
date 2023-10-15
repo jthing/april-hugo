@@ -6,7 +6,16 @@
     <description>Recent content in Posts on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Aug 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Oct 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>april-gpu</title>
+      <link>//jpthing.github.io/april-hugo/posts/april-gpu/</link>
+      <pubDate>Sun, 15 Oct 2023 00:00:00 +0200</pubDate>
+      
+      <guid>//jpthing.github.io/april-hugo/posts/april-gpu/</guid>
+      <description>April-GPU first version is finished Though there is still some debugging left the code is now complete.</description>
+    </item>
+    
     <item>
       <title>github repository online</title>
       <link>//jpthing.github.io/april-hugo/posts/github-repo-online/</link>
@@ -112,16 +121,6 @@ lectures</description>
       
       <guid>//jpthing.github.io/april-hugo/posts/u-net/</guid>
       <description>Exploring zero-framework, zero-library machine learning Research paper from Dyalog on machine learning in APL. paper</description>
-    </item>
-    
-    <item>
-      <title>April GPU</title>
-      <link>//jpthing.github.io/april-hugo/posts/april-gpu/</link>
-      <pubDate>Sun, 09 Jul 2023 13:09:24 +0200</pubDate>
-      
-      <guid>//jpthing.github.io/april-hugo/posts/april-gpu/</guid>
-      <description>Getting April to use a GPU Current state of affairs We live in days where there are constant wonders/horrors in the area of Machine Learning. For a long time this been the domain of a handful of tools.
-python numpy scipy jupyter ipython tensorflow torch pandas matplotlib rapids All of the above, but only for CUDA GPU&amp;rsquo;s and optimized to keep the computations in GPU RAM. Where April fits in April is just a APL compiler.</description>
     </item>
     
     <item>

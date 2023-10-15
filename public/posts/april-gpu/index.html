@@ -4,12 +4,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>April GPU - April - APL embedded in Common Lisp</title>
+    <title>april-gpu - April - APL embedded in Common Lisp</title>
 
     
     
-    <meta name="description" content="Getting April to use a GPU Current state of affairs We live in days where there are constant wonders/horrors in the area of Machine Learning. For a long time this been the domain of a handful of tools.
-python numpy scipy jupyter ipython tensorflow torch pandas matplotlib rapids All of the above, but only for CUDA GPU&rsquo;s and optimized to keep the computations in GPU RAM. Where April fits in April is just a APL compiler." />
+    <meta name="description" content="April-GPU first version is finished Though there is still some debugging left the code is now complete." />
     <meta name="author" content="" />
     
 
@@ -55,9 +54,9 @@ python numpy scipy jupyter ipython tensorflow torch pandas matplotlib rapids All
         <div class="max-w:700 w:full box:content-box">
 <article class="box:border-box pt:32">
     <header class="mb:32">
-        <div class="font:40 font:extrabold">April GPU</div>
+        <div class="font:40 font:extrabold">april-gpu</div>
         <div class="mt:16 f:fade-60">
-            <time>Jul 9, 2023</time>
+            <time>Oct 15, 2023</time>
             </div>
     </header><div class="
     _:where(a):hover{text-decoration-color:fade}
@@ -96,66 +95,8 @@ python numpy scipy jupyter ipython tensorflow torch pandas matplotlib rapids All
     _:where(video,img){max-width:full}
     _:where(a,mark){text-underline-offset:3}
     _:where(hr){h:2;_bg:fade-10;_bg:fade-70@dark;_my:3em}
-"><h2 id="getting-april-to-use-a-gpu">Getting April to use a GPU</h2>
-<h3 id="current-state-of-affairs">Current state of affairs</h3>
-<p>We live in days where there are constant wonders/horrors in the area of Machine Learning.
-For a long time this been the domain of a handful of tools.</p>
-<ul>
-<li>python
-<ul>
-<li>numpy</li>
-<li>scipy</li>
-</ul>
-</li>
-<li>jupyter
-<ul>
-<li>ipython</li>
-<li>tensorflow</li>
-<li>torch</li>
-<li>pandas</li>
-<li>matplotlib</li>
-</ul>
-</li>
-<li>rapids
-<ul>
-<li>All of the above, but only for CUDA GPU&rsquo;s and optimized to keep the computations in GPU RAM.</li>
-</ul>
-</li>
-</ul>
-<h3 id="where-april-fits-in">Where April fits in</h3>
-<p>April is just a APL compiler. At the moment it does a pretty good job of compiling APL on
-the CPU and uses multiple cores. For most traditional APL programming this is probably
-enough. But that is not why I got interested. I see the potential for using it as a tool
-for Machine learning. I am a mathematician and today&rsquo;s libraries hide what is going on
-inside. APL hides nothing. It is just a terse language for doing (mostly) linear
-algebra. As such it fits a niche. People like me who want to understand what the machine is
-doing when learning, not just cutting and pasting from online examples and hoping for the
-best. For handling the huge arrays we see in Machine Learning fast enough we are going to
-need to use the GPU.</p>
-<h3 id="how-do-we-do-it">How do we do it</h3>
-<p>April is the work of few people with limited time and resources. As such a huge cross
-platform solution like <a href="https://www.modular.com/mojo">mojo</a> was out of the question.
-Also I didn&rsquo;t want Vendor lock in and only rely on NVIDIA CUDA. In my research I also came
-across Vulcan. I started to realize that shaders can be general compute nodes, just like
-CUDA threads. Also it is possible to set up a compute pipeline in Vulcan without graphics
-output. In fact displaying graphics is a extension in Vulcan and not part of the Vulcan
-core.</p>
-<p><img src="../../images/spir.jpg" alt="SPIR"></p>
-<p>Vulcan accesses shaders in a binary cross platform format called SPIR-V.
-SPIRV-V is compiled to native code on the platform. It can be computed on AMD, NVIDIA and
-on MAC&rsquo;s with Metal. SPIR-V is also accessible trough OpenCL making work on devices like
-<a href="https://www.xilinx.com/products/som/kria.html">XILINX Kria</a> which is a FPGA with ARM
-cores and Mali. It can thus be used on mobile, desktop and robotics platforms.
-Pretty cool!</p>
-<h3 id="overall-design">Overall design</h3>
-<p>This is all a preliminary sketch. None of this has been build yet. Nevertheless I have a
-idea of how the structure is going to be.</p>
-<p>Here is a sketch of the design.</p>
-<p><img src="../../images/april-gpu.svg" alt="GPU compile"></p>
-<h3 id="gpu-pipeline">GPU pipeline</h3>
-<p>This follows rather rigid design dictated by Vulkan.</p>
-<p>Here is a sketch of the design.</p>
-<p><img src="../../images/april-vulkan.svg" alt="Vulcan Pipeline"></p>
+"><h2 id="april-gpu-first-version-is-finished">April-GPU first version is finished</h2>
+<p>Though there is still some debugging left the code is now complete.</p>
 </div></article>
 <footer class="py:24">
     <div class="f:fade-30 f:14 mb:8"></div>
