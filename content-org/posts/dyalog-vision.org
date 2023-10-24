@@ -1,0 +1,27 @@
+#+TITLE: Dyalog Vision
+#+AUTHOR: John Thingstad
+#+DATE: <2023-10-24 ti.>
+#+FILETAGS: none
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* Dyalog Vision
+
+I have been looking at the [[https://aplwiki.com/wiki/Family_tree_of_array_languages][APL family tree of languages]]
+
+Among them I found [[https://aplwiki.com/wiki/Dyalog_APL_Vision][Dyalog APL Vision]]
+
+Image processing is a field of interest to me. It can be done on the
+GPU and it fits into the idea of doing all the computations on the GPU
+aka NVIDIA Rapids. So I decided to make  a quick note of it.
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs 
