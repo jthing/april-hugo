@@ -6,26 +6,23 @@
     <description>Recent content in none on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0200</lastBuildDate><atom:link href="//jpthing.github.io/april-hugo/tags/none/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0200</lastBuildDate>
+    <atom:link href="//jpthing.github.io/april-hugo/tags/none/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dyalog Vision</title>
       <link>//jpthing.github.io/april-hugo/posts/dyalog-vision/</link>
       <pubDate>Tue, 24 Oct 2023 00:00:00 +0200</pubDate>
-      
       <guid>//jpthing.github.io/april-hugo/posts/dyalog-vision/</guid>
       <description>Dyalog Vision I have been looking at the APL family tree of languages
 Among them I found Dyalog APL Vision
 Image processing is a field of interest to me. It can be done on the GPU and it fits into the idea of doing all the computations on the GPU aka NVIDIA Rapids. So I decided to make a quick note of it.</description>
     </item>
-    
     <item>
       <title>github repository online</title>
       <link>//jpthing.github.io/april-hugo/posts/github-repo-online/</link>
       <pubDate>Wed, 09 Aug 2023 00:00:00 +0200</pubDate>
-      
       <guid>//jpthing.github.io/april-hugo/posts/github-repo-online/</guid>
       <description>Now posted on april-gpu. For the moment doesn&amp;rsquo;t do anything just basic build structure. Will load the necessary lisp libraries if you try to build it</description>
     </item>
-    
   </channel>
 </rss>
