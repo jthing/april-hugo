@@ -7,6 +7,6 @@ draft: false
 
 ## Uiua {#uiua}
 
-Uiua is a new array based programming language I hear of today on
+Uiua is a new array based programming language I heard of today on
 a LispNYc netmeet.
 [Uiua](https://www.uiua.org/)
