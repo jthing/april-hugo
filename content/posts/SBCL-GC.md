@@ -5,10 +5,10 @@ tags: ["april"]
 draft: false
 ---
 
-## New Garbage collector in 2.7.8 {#new-garbage-collector-in-2-dot-7-dot-8}
+## New Garbage collector in 2.3.8 {#new-garbage-collector-in-2-dot-3-dot-8}
 
-There is a new parallel garbage collector in SBCL 2.7.8 It is not enabled by default. To
-enable do a git clone of SBCL and make sure you have version 2.7.8. When compiling use
+There is a new parallel garbage collector in SBCL 2.3.8 It is not enabled by default. To
+enable do a git clone of SBCL and make sure you have version 2.3.8. When compiling use
 'sh make.sh --without-gencgc --with-mark-region-gc'
 
 Unfortunately after a git fetch I had SBCL 2.3.7.79-556d7db9e which gave the error
