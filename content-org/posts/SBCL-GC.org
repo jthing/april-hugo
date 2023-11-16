@@ -1,0 +1,35 @@
+#+title:      SBCL GC
+#+date:       [2023-11-16 to. 06:24]
+#+filetags:   :april:
+#+identifier: 20230809T065131
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* New Garbage collector in 2.7.8
+
+There is a new parallel garbage collector in SBCL 2.7.8 It is not enabled by default. To
+enable do a git clone of SBCL and make sure you have version 2.7.8. When compiling use
+'sh make.sh --without-gencgc --with-mark-region-gc'
+
+Unfortunately after a git fetch I had SBCL 2.3.7.79-556d7db9e which gave the error
+'Feature compatibility check failed, (":SB-THREAD requires :GENCGC" ...'
+
+Anyhow here is a paper announcing the new garbage collector.
+
+[[file:///home/john/Nedlastinger/swcl-gc.pdf][Parallel garbage collection for SBCL]]
+
+and here is the paper describing the original one
+
+[[https://dl.acm.org/doi/pdf/10.1145/800055.802042][Trading Data Space for Reduced Time and Code Space in Real-Time Garbage Collection on Stock Hardware]]
+
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso SBCL GC gencgc gc

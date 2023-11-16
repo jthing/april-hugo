@@ -6,8 +6,17 @@
     <description>Recent content in april on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Nov 2023 00:52:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 16 Nov 2023 06:24:00 +0100</lastBuildDate>
     <atom:link href="//jpthing.github.io/april-hugo/tags/april/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SBCL GC</title>
+      <link>//jpthing.github.io/april-hugo/posts/sbcl-gc/</link>
+      <pubDate>Thu, 16 Nov 2023 06:24:00 +0100</pubDate>
+      <guid>//jpthing.github.io/april-hugo/posts/sbcl-gc/</guid>
+      <description>New Garbage collector in 2.7.8 There is a new parallel garbage collector in SBCL 2.7.8 It is not enabled by default. To enable do a git clone of SBCL and make sure you have version 2.7.8. When compiling use &amp;lsquo;sh make.sh &amp;ndash;without-gencgc &amp;ndash;with-mark-region-gc&amp;rsquo;
+Unfortunately after a git fetch I had SBCL 2.3.7.79-556d7db9e which gave the error &amp;lsquo;Feature compatibility check failed, (&amp;quot;:SB-THREAD requires :GENCGC&amp;quot; &amp;hellip;&amp;rsquo;
+Anyhow here is a paper announcing the new garbage collector.</description>
+    </item>
     <item>
       <title>Uiua</title>
       <link>//jpthing.github.io/april-hugo/posts/uiua/</link>
