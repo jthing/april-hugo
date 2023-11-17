@@ -20,4 +20,5 @@ Anyhow here is a paper announcing the new garbage collector.
 
 and here is the paper describing the original one
 
-[Trading Data Space for Reduced Time and Code Space in Real-Time Garbage Collection on Stock Hardware](https://dl.acm.org/doi/pdf/10.1145/800055.802042)
+[[<https://www.hpl.hp.com/techreports/Compaq-DEC/WRL-TN-12.pdf>][Trading Data Space for
+Reduced Time and Code Space in Real-Time Garbage Collection on Stock Hardware]
