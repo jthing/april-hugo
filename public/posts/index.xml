@@ -13,7 +13,7 @@
       <link>//jpthing.github.io/april-hugo/posts/noffi/</link>
       <pubDate>Mon, 27 Nov 2023 00:00:00 +0100</pubDate>
       <guid>//jpthing.github.io/april-hugo/posts/noffi/</guid>
-      <description>noffi Nocturnal FFI is a novel kind of FFI for Common Lisp. The basic idea is that it should not require any more effort to use some C library from Lisp than it is from C. A mere
+      <description>Nocturnal FFI is a novel kind of FFI for Common Lisp. The basic idea is that it should not require any more effort to use some C library from Lisp than it is from C. A mere
 #include &amp;lt;foo.h&amp;gt; should suffice to begin using the foo library.
 However, at the moment this is still work in progress. It&amp;rsquo;s not as fast and slim as it could be and the API is likely to change.</description>
     </item>
