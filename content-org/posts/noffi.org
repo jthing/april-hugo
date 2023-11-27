@@ -1,0 +1,30 @@
+#+TITLE: noffi
+#+AUTHOR: John Thingstad
+#+DATE: <2023-11-27 ma.>
+#+FILETAGS: none
+#+OPTIONS: author:nil
+
+#+hugo_base_dir: ~/Dokumenter/April
+#+hugo_selection: posts
+#+hugo_front_matter_format: yaml
+
+* noffi
+
+Nocturnal FFI is a novel kind of FFI for Common Lisp. The basic idea is that it should not require any more effort to use some C library from Lisp than it is from C. A mere
+
+#include <foo.h>
+should suffice to begin using the foo library.
+
+However, at the moment this is still work in progress. It's not as fast and slim as it could be and the API is likely to change.
+
+[[noffi][https://lispcafe.org/fossil/noffi/home]]
+
+#content
+
+# Local Variables:
+# eval: (set-fill-column 90)
+# eval: (auto-fill-mode t)
+# eval: (org-hugo-auto-export-mode t)
+# End:
+
+#  LocalWords:  SPIR Vulkan GPUs Juuso noffi FFI

@@ -6,8 +6,17 @@
     <description>Recent content in none on April - APL embedded in Common Lisp</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Oct 2023 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 27 Nov 2023 00:00:00 +0100</lastBuildDate>
     <atom:link href="//jpthing.github.io/april-hugo/tags/none/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>noffi</title>
+      <link>//jpthing.github.io/april-hugo/posts/noffi/</link>
+      <pubDate>Mon, 27 Nov 2023 00:00:00 +0100</pubDate>
+      <guid>//jpthing.github.io/april-hugo/posts/noffi/</guid>
+      <description>noffi Nocturnal FFI is a novel kind of FFI for Common Lisp. The basic idea is that it should not require any more effort to use some C library from Lisp than it is from C. A mere
+#include &amp;lt;foo.h&amp;gt; should suffice to begin using the foo library.
+However, at the moment this is still work in progress. It&amp;rsquo;s not as fast and slim as it could be and the API is likely to change.</description>
+    </item>
     <item>
       <title>Dyalog Vision</title>
       <link>//jpthing.github.io/april-hugo/posts/dyalog-vision/</link>
